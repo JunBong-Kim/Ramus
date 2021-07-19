@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "928680222587-8iar0a499outtl5a0gessdh133pht2k2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackathon.ramus",
+            "certificate_hash": "98ab4198edd2b91d2bf2f1d6eb4fa7a1cb50c16f"
+          }
+        },
+        {
           "client_id": "928680222587-qmiuimutk3n5sne211e0u6q4jigedjb2.apps.googleusercontent.com",
           "client_type": 3
         }
