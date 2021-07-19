@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "928680222587",
+    "project_id": "knulibrary-99259",
+    "storage_bucket": "knulibrary-99259.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928680222587:android:bad561eabd6d1d400e67de",
+        "android_client_info": {
+          "package_name": "com.hackathon.ramus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928680222587-20em231hr6obh0e8n12na5ta02ghpfna.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackathon.ramus",
+            "certificate_hash": "58240e0f608e9a258a68bffbff96f3aa1a0439fe"
+          }
+        },
+        {
+          "client_id": "928680222587-qmiuimutk3n5sne211e0u6q4jigedjb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg7GUSIV-VLPlApD0JI2IdlRNH7xFB8vs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928680222587-qmiuimutk3n5sne211e0u6q4jigedjb2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
