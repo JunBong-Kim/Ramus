@@ -43,6 +43,11 @@ public class Repository {
         map.put(FILED_NAME_USER_STUDENT_NUMBER,user.getUserStudentNumber());
         db.collection(COLLECTION_NAME_OF_USERS).document(user.getUserKey()).set(map, SetOptions.merge());
     }
+    public void updateFcmToken(String userKey,String token){
+        Map<String,Object> map = new HashMap<>();
+        map.put(FILED_NAME_USER_FCM_TOKEN,token);
+        db.collection(COLLECTION_NAME_OF_USERS).document(userKey).update(map);
+    }
 
 
     public FirebaseUser getUser() {

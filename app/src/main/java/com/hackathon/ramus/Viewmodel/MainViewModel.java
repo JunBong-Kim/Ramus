@@ -23,6 +23,9 @@ public class MainViewModel extends ViewModel {
     public LiveData<User> getSpecificUserLiveData(String key) {
         return Repository.getInstance(mContext).getSpecificUserData(key);
     }
+    public void updateFcmToken(String userKey,String token){
+        Repository.getInstance(mContext).updateFcmToken(userKey,token);
+    }
 
 
 }
