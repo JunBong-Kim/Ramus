@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -15,6 +16,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.hackathon.ramus.Dialog.ConfirmSeatDialog;
+import com.hackathon.ramus.Dialog.MyListener;
 import com.hackathon.ramus.Model.NotificationData;
 import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Notification.APIService;
@@ -30,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity implements MyListener {
     private ActivityMain2Binding binding;
     private Main2Viewmodel viewModel;
     private final String TAG = "MainActivity2";
@@ -81,6 +85,9 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+
+
+
         /*FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {
@@ -96,5 +103,29 @@ public class MainActivity2 extends AppCompatActivity {
         });*/
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            ConfirmSeatDialog dialog = new ConfirmSeatDialog(MainActivity2.this);
+            dialog.show();
 
+
+            /* if(result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                // todo
+            } else {
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                // todo
+            }*/
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+    @Override
+    public void notifyPositiveButtonClick() {
+        Toast.makeText(this, "1234", Toast.LENGTH_SHORT).show();
+    }
 }
