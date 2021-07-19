@@ -1,62 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EmailAuthLoginActivity"
-    android:orientation="vertical"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout_first"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include
+        layout="@layout/activity_start"
+        android:id="@+id/start"
+        >
+    </include>
+    <include
+        layout="@layout/activity_email_register"
+        android:id="@+id/email_register"
+        android:visibility="gone"
+        >
+    </include>
 
-    <TextView
-        android:text="학교 인증 메일 입력"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="19sp"
-        android:textColor="#0288D1"
-        />
-
-
-    <EditText
-        android:id="@+id/editText_knu_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="jangzzang@knu.ac.kr"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="19sp"
-        android:textColor="#0288D1"
-        />
-
-    <EditText
-        android:id="@+id/editText_knu_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="19sp"
-        android:textColor="#0288D1"
-        />
-
-
-    <Button
-        android:text="로그인"
-        android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

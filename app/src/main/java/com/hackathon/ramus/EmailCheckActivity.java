@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,6 +14,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,10 +63,10 @@ public class EmailCheckActivity extends AppCompatActivity {
 
     private void setListeners(){
 
-        binding.buttonNext.setOnClickListener(new View.OnClickListener() {
+        binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputNumber = binding.editTextAnswerNumber.getText().toString();
+                String inputNumber = binding.editTextNumber.getText().toString();
                 if(checkNumbers(inputNumber)){
                     startUserRegisterActivity();
                 }else{
@@ -77,6 +83,17 @@ public class EmailCheckActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(EmailCheckViewModel.class);
         viewModel.init(this);
 
+
+        binding.editTextNumber.requestFocus();
+        InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        Animation animation = new AlphaAnimation(0, 1);
+        animation.setDuration(600);
+        animation.setStartOffset(430);
+        binding.buttonRegister.setVisibility(View.VISIBLE);
+        binding.buttonRegister.startAnimation(animation);
+
                 /*
         viewModel = new ViewModelProvider(this).get(EmailAuthLoginViewModel.class);
         viewModel.init(this);
@@ -89,6 +106,7 @@ public class EmailCheckActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),UserRegisterActivity.class);
         intent.putExtra(INTENT_DATA_EMAIL,email);
         startActivity(intent);
+        overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
         finish();
     }
 

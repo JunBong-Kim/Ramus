@@ -2,9 +2,11 @@ package com.hackathon.ramus;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,6 +17,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,10 +68,15 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         init();
         checkForFirstStart();
         setClickListeners();
+
+
+
+
+
     }
 
     private void setClickListeners(){
-        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
+        binding.emailRegister.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendMail();
@@ -73,7 +85,7 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
     }
 
     private void sendMail(){
-        String mail = binding.editTextKnuEmail.getText().toString();
+        String mail = binding.emailRegister.editTextEmail.getText().toString() +"@knu.ac.kr";
         String message = randomNumber +"를 입력해 주세요";
         String subject = "knu library 앱을 활용기 위한 인증 메일입니다";
 
@@ -87,6 +99,7 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         boolean isEmailRegistered = SharedPreferenceManager.getFirstCheckBooleanData(getApplicationContext(),IS_EMAIL_REGISTERED);
         if(!isEmailRegistered)return;
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
         finish();
     }
 
@@ -96,6 +109,26 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(EmailAuthLoginViewModel.class);
         viewModel.init(this);
+
+        ConstraintLayout constraintLayoutl1 = findViewById(R.id.start);
+        ConstraintLayout constraintLayoutl2 = findViewById(R.id.email_register);
+        binding.start.buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.emailRegister.editTextEmail.requestFocus();
+                constraintLayoutl1.setVisibility(View.GONE);
+                constraintLayoutl2.setVisibility(View.VISIBLE);
+                InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                Animation animation = new AlphaAnimation(0, 1);
+                animation.setDuration(300);
+
+                binding.emailRegister.buttonRegister.setVisibility(View.VISIBLE);
+                binding.emailRegister.buttonRegister.startAnimation(animation);
+            }
+        });
+
 
     }
 
@@ -169,6 +202,7 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
             intent.putExtra(INTENT_DATA_NUMBER,randomNumber);
             intent.putExtra(INTENT_DATA_EMAIL,this.mEmail);
             startActivity(intent);
+            overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
             finish();
         }
 
@@ -219,6 +253,7 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
          String email = SharedPreferenceManager.getEmail(EmailAuthLoginActivity.this,SharedPreferenceManager.KNU_EMAIL);
         if(email.equals(SharedPreferenceManager.DEFAULT_EMAIL_VALUE))return;
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
         finish();
 
     }
