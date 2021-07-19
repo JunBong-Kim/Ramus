@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.hackathon.ramus.databinding.ActivityEmailAuthLoginBinding;
 
 public class EmailAuthLoginActivity extends AppCompatActivity {
@@ -20,14 +24,35 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
     private ActivityEmailAuthLoginBinding binding;
     ActionCodeSettings actionCodeSettings;
 
+    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: " + mUser.isEmailVerified() );
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
 
-        sendEmailTest();
+       /* sendEmailTest();
 
-
+        Log.e(TAG, "onCreate: " + mUser.getEmail() );
+        mUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e(TAG, "onSuccess:성공" );
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "email: " + e.getMessage() );
+            }
+        });
+*/
+        //mUser.isEmailVerified()
     }
 
 
@@ -36,40 +61,24 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         binding = ActivityEmailAuthLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-         actionCodeSettings =
-                ActionCodeSettings.newBuilder()
-                        // URL you want to redirect back to. The domain (www.example.com) for this
-                        // URL must be whitelisted in the Firebase Console.
-                        .setUrl("knulibrary-99259.firebaseapp.com")
-                        // This must be true
-                        .setHandleCodeInApp(true)
-                        .setIOSBundleId("com.example.ios")
-                        .setAndroidPackageName(
-                                "com.hackathon.ramus",
-                                true, /* installIfNotAvailable */
-                                "12"    /* minimumVersion */)
-                        .build();
+
 
     }
 
     private void sendEmailTest(){
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.sendSignInLinkToEmail("shut_malfoy@naver.com",actionCodeSettings)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.e(TAG, "Email sent.");
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        auth.createUserWithEmailAndPassword("shut_malfoy@naver.com","123456")
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(EmailAuthLoginActivity.this, "" + authResult.getUser().getEmail(), Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Email sent." + e.getMessage());
-
+                Log.e(TAG, "onFailure: " + e.getMessage() );
             }
         });
-
 
     }
 
