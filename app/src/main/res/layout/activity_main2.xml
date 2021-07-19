@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity2"
     >
 
     <EditText
         android:id="@+id/user_name_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="이름"
         android:textSize="12sp"
         />
@@ -21,6 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="등록"
+        />
+
+    <Button
+        android:id="@+id/qr_code_make_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR 코드 생성"
+        />
+
+    <Button
+        android:id="@+id/qr_code_scan_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR 코드 스캔"
         />
 
 </LinearLayout>
