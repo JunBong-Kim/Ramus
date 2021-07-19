@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hackathon.ramus">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -11,16 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ramus">
-        <activity android:name=".CreateQrActivity"></activity>
+        <activity android:name=".UserRegisterActivity"></activity>
+        <activity android:name=".EmailCheckActivity" />
+        <activity android:name=".CreateQrActivity" />
         <activity android:name=".ScanQrActivity" />
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
+        <activity android:name=".EmailSignUpActivity" />
         <activity android:name=".EmailAuthLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MainActivity2"/>
+        <activity android:name=".MainActivity2" />
     </application>
 
 </manifest>

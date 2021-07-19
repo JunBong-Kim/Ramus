@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.hackathon.ramus.Constants.*;
+import static com.hackathon.ramus.Repository.FireStoreLiveData.DOCUMENT;
 
 
 public class Repository {
@@ -39,6 +40,7 @@ public class Repository {
         map.put(FILED_NAME_USER_NAME, user.getUserName());
         map.put(FILED_NAME_USER_FCM_TOKEN, user.getUserFcmToken());
         map.put(FILED_NAME_USER_KEY, user.getUserKey());
+        map.put(FILED_NAME_USER_STUDENT_NUMBER,user.getUserStudentNumber());
         db.collection(COLLECTION_NAME_OF_USERS).document(user.getUserKey()).set(map, SetOptions.merge());
     }
 
@@ -47,5 +49,8 @@ public class Repository {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
+    public LiveData<User> getSpecificUserData(String userKey) {
+        return new FireStoreLiveData<>(db.collection(COLLECTION_NAME_OF_USERS).document(userKey), User.class, DOCUMENT);
+    }
 
 }
