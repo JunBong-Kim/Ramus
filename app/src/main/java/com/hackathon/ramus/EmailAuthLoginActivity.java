@@ -69,11 +69,11 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword("shut_malfoy@naver.com","123456")
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(EmailAuthLoginActivity.this, "" + authResult.getUser().getEmail(), Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(EmailAuthLoginActivity.this, "" + authResult.getUser().getEmail(), Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.e(TAG, "onFailure: " + e.getMessage() );

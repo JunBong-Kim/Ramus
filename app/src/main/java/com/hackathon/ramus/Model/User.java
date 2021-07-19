@@ -5,7 +5,8 @@ public class User {
     private String userName;
     private String userFcmToken;
 
-    public User(String userName, String userFcmToken) {
+    public User(String userKey,String userName, String userFcmToken) {
+        this.userKey=userKey;
         this.userName = userName;
         this.userFcmToken = userFcmToken;
     }

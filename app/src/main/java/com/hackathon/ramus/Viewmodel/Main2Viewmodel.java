@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Repository.Repository;
 
@@ -15,6 +16,9 @@ public class Main2Viewmodel extends ViewModel {
             return;
         }
         mContext = context;
+    }
+    public FirebaseUser getUser(){
+        return Repository.getInstance(mContext).getUser();
     }
 
     public void setUserData(User user){
