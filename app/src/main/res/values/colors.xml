@@ -16,6 +16,7 @@
     <color name="dialog_alpha">#81D7D7D8</color>
     <color name="background_secondary">#ffffff</color>
     <color name="background_reverse">#080808</color>
+    <color name="background_third">#FAFAFA</color>
 
     <color name="text_primary">#1a1f27</color>
     <color name="text_second">#50505A</color>
@@ -29,9 +30,14 @@
     <color name="icon_uncliked2">#B8B8B8</color>
 
 
+    <color name="green_background">#F1FAF3</color>
+    <color name="red_background">#FDECEC</color>
 
     <color name="line_gray">#EAEAEA</color>
     <color name="line_shygray">#C3F4F4F4</color>
+
+    <color name="yellow_background">#FFF5DA</color>
+    <color name="bluedark_background">#c4d4eb</color>
 
 </resources>
 
