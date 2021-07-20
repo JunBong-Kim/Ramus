@@ -49,10 +49,6 @@ public class ConfirmSeatDialog extends BottomSheetDialog {
 
         Log.e(TAG, "onCreate: yyyy_mm_dd_string" + yyyy_mm_dd_string );
 
-
-
-
-
         binding.timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {

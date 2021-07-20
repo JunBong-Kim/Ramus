@@ -1,43 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-
-
-
-    <Button
-        android:id="@+id/button_qr_open"
+    <TextView
+        android:id="@+id/textView_area_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
-
-    <Button
-        android:text="학교 코로나 정보"
-        android:id="@+id/button_webView_knu_info"
+    <TextView
+        android:id="@+id/textView_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/textView_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
-    <Button
-        android:id="@+id/button_webView_daeGu_info"
-        android:text="대구 코로나 정보"
+    <TextView
+        android:id="@+id/textView_gov_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
-    <Button
-        android:id="@+id/button_daegu_covid_news"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
 
 
 </LinearLayout>

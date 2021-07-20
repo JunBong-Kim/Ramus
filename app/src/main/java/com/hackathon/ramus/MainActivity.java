@@ -22,6 +22,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hackathon.ramus.Dialog.ConfirmSeatDialog;
 import com.hackathon.ramus.Dialog.MyListener;
+import com.hackathon.ramus.Model.DaeguCovidNews;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.MainViewModel;
@@ -93,7 +94,16 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 startActivity(intent);
             }
         });
+
+        binding.buttonDaeguCovidNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
+            }
+        });
     }
+
+
 
     private void init() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -146,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         seatKey = "1열람실23";
+        //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
+
         db.collection(COLLECTION_NAME_OF_USERS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

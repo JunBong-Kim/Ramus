@@ -11,10 +11,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ramus">
-        <activity android:name=".WebViewActivity"></activity>
+        android:theme="@style/Theme.Ramus"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".DaeguCovidConfirmationActivity"></activity>
+        <activity android:name=".WebViewActivity" />
         <activity android:name=".OccupiedMainActivity" />
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".EmailCheckActivity" />
