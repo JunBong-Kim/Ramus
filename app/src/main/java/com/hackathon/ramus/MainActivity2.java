@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity2 extends AppCompatActivity implements MyListener {
+public class MainActivity2 extends AppCompatActivity {
     private ActivityMain2Binding binding;
     private Main2Viewmodel viewModel;
     private final String TAG = "MainActivity2";
@@ -124,8 +124,5 @@ public class MainActivity2 extends AppCompatActivity implements MyListener {
     }
 
 
-    @Override
-    public void notifyPositiveButtonClick() {
-        Toast.makeText(this, "1234", Toast.LENGTH_SHORT).show();
-    }
+
 }

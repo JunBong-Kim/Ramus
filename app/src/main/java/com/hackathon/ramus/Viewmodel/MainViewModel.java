@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.database.core.Repo;
+import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Repository.Repository;
 
@@ -27,5 +29,15 @@ public class MainViewModel extends ViewModel {
         Repository.getInstance(mContext).updateFcmToken(userKey,token);
     }
 
+    public void updateUserNewSeatKey(String userKey,String userSeatKey){
+        Repository.getInstance(mContext).updateUserNewSeatKey(userKey,userSeatKey);
+    }
 
+    public void updateSeatNewUserKeyAndNewEndTime(String seatKey,String userKey,Long seatReservationEndTime){
+        Repository.getInstance(mContext).updateSeatNewUserKeyAndNewEndTime(seatKey,userKey,seatReservationEndTime);
+    }
+
+    public void setSeatData(Seat seat) {
+        Repository.getInstance(mContext).setSeatData(seat);
+    }
 }

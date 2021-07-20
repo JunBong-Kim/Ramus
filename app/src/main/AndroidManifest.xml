@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ramus">
-        <activity android:name=".UserRegisterActivity"></activity>
+        <activity android:name=".OccupiedMainActivity"></activity>
+        <activity android:name=".UserRegisterActivity" />
         <activity android:name=".EmailCheckActivity" />
         <activity android:name=".CreateQrActivity" />
         <activity android:name=".ScanQrActivity" />

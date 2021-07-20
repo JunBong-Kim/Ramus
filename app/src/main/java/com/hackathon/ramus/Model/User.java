@@ -5,8 +5,17 @@ public class User {
     private String userName;
     private String userStudentNumber;
     private String userFcmToken;
+    private String userSeat;
 
     public User() {
+    }
+
+    public User(String userKey, String userName, String userStudentNumber, String userFcmToken, String userSeat) {
+        this.userKey = userKey;
+        this.userName = userName;
+        this.userStudentNumber = userStudentNumber;
+        this.userFcmToken = userFcmToken;
+        this.userSeat = userSeat;
     }
 
     public User(String userKey, String userName, String userFcmToken) {
@@ -52,5 +61,13 @@ public class User {
 
     public void setUserKey(String userKey) {
         this.userKey = userKey;
+    }
+
+    public String getUserSeat() {
+        return userSeat;
+    }
+
+    public void setUserSeat(String userSeat) {
+        this.userSeat = userSeat;
     }
 }

@@ -17,6 +17,7 @@ import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Repository.Repository;
 import com.hackathon.ramus.databinding.ActivityUserRegisterBinding;
 
+import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 
 public class UserRegisterActivity extends AppCompatActivity {
@@ -88,7 +89,7 @@ public class UserRegisterActivity extends AppCompatActivity {
     private void setSharedRefEmailAndFirebaseDb(){
         String email = getIntent().getExtras().getString(INTENT_DATA_EMAIL);
         SharedPreferenceManager.setEmail(UserRegisterActivity.this,SharedPreferenceManager.KNU_EMAIL,email);
-        User user = new User(email,userName,userStudentNumber,"tempToken");
+        User user = new User(email,userName,userStudentNumber,"tempToken",DATA_USER_SEAT_NULL);
         Repository.getInstance(UserRegisterActivity.this).setUserData(user);
     }
 
