@@ -11,9 +11,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ramus">
-        <activity android:name=".OccupiedMainActivity"></activity>
+        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".OccupiedMainActivity" />
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".EmailCheckActivity" />
         <activity android:name=".CreateQrActivity" />

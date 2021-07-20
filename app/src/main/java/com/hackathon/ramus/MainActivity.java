@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +31,9 @@ import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_USERS;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_KEY;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_RESERVATION_END_TIME;
-import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_USER_KEY;
+import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
+import static com.hackathon.ramus.Constants.TYPE_DAEGU;
+import static com.hackathon.ramus.Constants.TYPE_KNU;
 
 public class MainActivity extends AppCompatActivity implements MyListener {
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private String userKey;
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
+
 
 
     @Override
@@ -69,6 +73,24 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 qrScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
                 qrScan.setPrompt("Sample Text!");
                 qrScan.initiateScan();
+            }
+        });
+
+        binding.buttonWebViewDaeGuInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_DAEGU);
+                startActivity(intent);
+            }
+        });
+
+        binding.buttonWebViewKnuInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KNU);
+                startActivity(intent);
             }
         });
     }
@@ -132,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     if(document.exists()) {
                         String seatKey = String.valueOf(document.getData().get(FIELD_NAME_SEAT_KEY));
                         long seatReservationEndTime = Long.valueOf(String.valueOf(document.getData().get(FIELD_NAME_SEAT_RESERVATION_END_TIME)));
-
                         //자리가 있을때는, 상대방의 키 없애고,
                         if (seatReservationEndTime > System.currentTimeMillis())
                             viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);

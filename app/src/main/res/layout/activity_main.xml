@@ -9,11 +9,29 @@
     android:orientation="vertical"
     >
 
+
+
     <Button
         android:id="@+id/button_qr_open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
+
+    <Button
+        android:text="학교 코로나 정보"
+        android:id="@+id/button_webView_knu_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/button_webView_daeGu_info"
+        android:text="대구 코로나 정보"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 
 
 </LinearLayout>

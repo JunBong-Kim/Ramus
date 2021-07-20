@@ -23,8 +23,12 @@ public class Constants {
 
     public static final String INTENT_DATA_NUMBER = "INTENT_DATA_NUMBER";
     public static final String INTENT_DATA_EMAIL ="INTENT_DATA_EMAIL";
+    public static final String INTENT_DATA_WEB_VIEW_TYPE= "INTENT_DATA_WEB_VIEW_TYPE";
 
     public static final String DATA_USER_SEAT_NULL = "NULL";
+
+    public static final int TYPE_KNU = 0;
+    public static final int TYPE_DAEGU = 1;
 
 
     /*
