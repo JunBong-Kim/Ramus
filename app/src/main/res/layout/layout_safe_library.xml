@@ -22,12 +22,13 @@
             android:background="#00FFFFFF"
             android:fontFamily="@font/spoqahansans_medium"
             android:letterSpacing="-0.07"
-            android:text="안심 도서관"
+            android:text="Safe KNU"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

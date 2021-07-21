@@ -99,7 +99,6 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         boolean isEmailRegistered = SharedPreferenceManager.getFirstCheckBooleanData(getApplicationContext(),IS_EMAIL_REGISTERED);
         if(!isEmailRegistered)return;
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
         finish();
     }
 
@@ -253,7 +252,6 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
          String email = SharedPreferenceManager.getEmail(EmailAuthLoginActivity.this,SharedPreferenceManager.KNU_EMAIL);
         if(email.equals(SharedPreferenceManager.DEFAULT_EMAIL_VALUE))return;
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
         finish();
 
     }

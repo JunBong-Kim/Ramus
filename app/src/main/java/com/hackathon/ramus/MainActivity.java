@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
-        binding.layoutCoronaWeb.daegu4.setOnClickListener(new View.OnClickListener() {
+        binding.layoutCoronaWeb.imageDeaguSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
