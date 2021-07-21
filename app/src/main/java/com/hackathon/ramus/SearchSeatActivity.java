@@ -1,25 +1,35 @@
 package com.hackathon.ramus;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.hackathon.ramus.Adapters.ViewPagerSliderAdapter;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Repository.Repository;
 import com.hackathon.ramus.Viewmodel.EmailSignUpViewModel;
@@ -42,13 +52,36 @@ public class SearchSeatActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private int select;
 
+    private int[] images= new int[4];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLiveData();
         init();
+        setupHomeImage();
     }
+
+
+
+    private void setupHomeImage () {
+        images[0] = R.drawable.library_image1;
+        images[1] = R.drawable.library_image2;
+        images[2] = R.drawable.library_image3;
+        images[3] = R.drawable.library_image4;
+
+        binding.layoutRoom.viewpagerLibrary.setAdapter(new ViewPagerSliderAdapter(this, images));
+        binding.layoutRoom.viewpagerLibrary.setOffscreenPageLimit(4);
+
+        binding.layoutRoom.viewpagerLibrary.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+        });
+    }
+
 
     private void getLiveData() {
         viewModel = new SeatViewModel();
@@ -83,21 +116,46 @@ public class SearchSeatActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void init() {
+
         binding = ActivitySearchSeatBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
+
+
         constraintLayout1 = findViewById(R.id.layout_floor);
         constraintLayout2 = findViewById(R.id.layout_room);
-        animation = AnimationUtils.loadAnimation(this, R.anim.scale_up);
-        animation2 = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+        animation = AnimationUtils.loadAnimation(this, R.anim.ani_right);
+        animation.setDuration(450);
+        animation2 = AnimationUtils.loadAnimation(this, R.anim.ani_left);
+        animation2.setDuration(450);
         binding.layoutFloor.B1.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제1열람실 A (" + emptySeats[0] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("제1열람실 B (" + emptySeats[1] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("제1열람실 노트북석 (" + emptySeats[2] + "/100)");
+
+                    binding.layoutRoom.textviewFirst.setText("제1열람실 A");
+                    binding.layoutRoom.textviewSecond.setText("제1열람실 B");
+                    binding.layoutRoom.textviewThird.setText("제1열람실 노트북석");
+
+                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[0]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[1]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[2]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+
+                    //만석이면
+                    binding.layoutRoom.first.prgressbar.setProgressStartColor(getColor(R.color.red_progress));
+                    binding.layoutRoom.first.prgressbar.setProgressEndColor(getColor(R.color.red_progress));
+
+                    //만석아니면
+                    //binding.layoutRoom.first.prgressbar.setProgressStartColor(getColor(R.color.blue_progress));
+                    //binding.layoutRoom.first.prgressbar.setProgressEndColor(getColor(R.color.blue_progress));
+
                     select = 0;
                 }
 
@@ -108,10 +166,19 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("CRETEC Zone (" + emptySeats[3] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("S-Lounge (" + emptySeats[4] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("캐럴 (" + emptySeats[5] + "/100)");
+                    binding.layoutRoom.textviewFirst.setText("CRETEC Zone");
+                    binding.layoutRoom.textviewSecond.setText("S-Lounge");
+                    binding.layoutRoom.textviewThird.setText("캐럴");
                     select = 1;
+
+
+
+                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[3]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[3]/100.0)*100));
+                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[4]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[4]/100.0)*100));
+                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[5]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[5]/100.0)*100));
                 }
             }
         });
@@ -120,10 +187,17 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제2열람실 A (" + emptySeats[6] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("제2열람실 B (" + emptySeats[7] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("제2열람실 C (" + emptySeats[8] + "/100)");
+                    binding.layoutRoom.textviewFirst.setText("제2열람실 A");
+                    binding.layoutRoom.textviewSecond.setText("제2열람실 B");
+                    binding.layoutRoom.textviewThird.setText("제2열람실 C");
                     select = 2;
+
+                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[6]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[6]/100.0)*100));
+                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[7]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[7]/100.0)*100));
+                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[8]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[8]/100.0)*100));
                 }
             }
         });
@@ -132,10 +206,17 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (" + emptySeats[9] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (" + emptySeats[10] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("제3열람실 C (" + emptySeats[11] + "/100)");
+                    binding.layoutRoom.textviewFirst.setText("제3열람실 A");
+                    binding.layoutRoom.textviewSecond.setText("제3열람실 B");
+                    binding.layoutRoom.textviewThird.setText("제3열람실 C");
                     select = 3;
+
+                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[9]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[10]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[11]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
                 }
             }
         });
@@ -144,11 +225,19 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제4열람실 A (" + emptySeats[12] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("제4열람실 B (" + emptySeats[13] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("제4열람실 C (" + emptySeats[14] + "/100)");
+                    binding.layoutRoom.textviewFirst.setText("제4열람실 A");
+                    binding.layoutRoom.textviewSecond.setText("제4열람실 B");
+                    binding.layoutRoom.textviewThird.setText("제4열람실 C");
                     select = 4;
+
+                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[12]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[13]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[14]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
                 }
+
             }
         });
         binding.backpress.setOnClickListener(new View.OnClickListener() {

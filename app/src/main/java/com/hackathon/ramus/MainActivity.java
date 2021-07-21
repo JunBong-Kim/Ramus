@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             public void onClick(View v) {
                 IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
                 qrScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
-                qrScan.setPrompt("이용하실 열람실 자리의 qr코드를 찍어주세요\n\n");
+                qrScan.setPrompt("이용하실 열람실 좌석의 qr코드를 찍어주세요\n\n");
                 qrScan.initiateScan();
             }
         });

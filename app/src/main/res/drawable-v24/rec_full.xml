@@ -7,12 +7,6 @@
     <solid android:color="@color/red_background" />
 
 
-   <stroke
-       android:width="2dp"
-       android:color="@color/black"
-       >
-   </stroke>
-
 
     <corners
         android:topLeftRadius="18dp"
