@@ -1,32 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="22dp"
+    android:layout_marginVertical="22dp"
+    android:layout_gravity="center_vertical"
     >
-    <TextView
-        android:id="@+id/textView_area_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
-    <TextView
-        android:id="@+id/textView_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/textView_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
-    <TextView
-        android:id="@+id/textView_gov_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:id="@+id/danger"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:background="@drawable/oval_red"
+            android:padding="8dp"
+            android:src="@drawable/ic_megaphone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <LinearLayout
+        android:layout_marginLeft="6dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/recdia"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView_gov_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/spoqahansans_regular"
+                android:text="대구광역시"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView_time"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/spoqahansans_regular"
+                android:text="2분전"
+                android:textColor="@color/text_third"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/textView_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/spoqahansans_regular"
+            android:text="21일 0시 기준 확진자 36명 발생. 지역발생 34명(북구13,달서구10,수성구4,달성군3,중구1,서구1,남구1,구미시1), 해외유입 2명."
+            android:textColor="@color/text_second" />
+
+
+
+        <TextView
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView_area_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqahansans_regular"
+            android:textColor="@color/text_second"
+            />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
+
+

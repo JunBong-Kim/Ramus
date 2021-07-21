@@ -1,12 +1,16 @@
 package com.hackathon.ramus;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.hackathon.ramus.Adapters.DaeguCovidConfirmationAdapter;
@@ -31,11 +35,13 @@ public class DaeguCovidConfirmationActivity extends AppCompatActivity {
     private Document doc;
     private ArrayList<DaeguCovidNews> arrayList = new ArrayList<>();
     private DaeguCovidConfirmationAdapter adapter;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         init();
+
         new JsoupAsyncTask().execute();
     }
 
@@ -46,6 +52,16 @@ public class DaeguCovidConfirmationActivity extends AppCompatActivity {
         adapter = new DaeguCovidConfirmationAdapter();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
+
+        binding.toolbar.setTitle("대구시 재난문자");
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
