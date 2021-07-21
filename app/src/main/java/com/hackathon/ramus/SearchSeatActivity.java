@@ -37,6 +37,8 @@ public class SearchSeatActivity extends AppCompatActivity {
     private int[] emptySeats = new int[15];
     private String[] testString = {"제1열람실A", "제1열람실B", "제1열람실노트북석", "CRETECZONE", "S-Lounge", "캐럴", "제2열람실A", "제2열람실B"
             , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
+    private String[] roomNames = {"제 1열람실 A", "제 1열람실 B", "제 1열람실 노트북석", "CRETEC ZONE", "S-Lounge", "캐럴", "제 2열람실 A", "제 2열람실 B"
+            , "제 2열람실 C", "제 3열람실 A", "제 3열람실 B", "제 3열람실 C", "제 4열람실 A", "제 4열람실 B", "제 4열람실 C"};
     FirebaseAuth mAuth;
     private int select;
 
@@ -65,6 +67,15 @@ public class SearchSeatActivity extends AppCompatActivity {
                         }
                     }
                     emptySeats[finalI] = cnt;
+                    if (finalI / 3 == select) {
+                        if (finalI % 3 == 0) {
+                            binding.layoutRoom.textviewFirst.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                        } else if (finalI % 3 == 1) {
+                            binding.layoutRoom.textviewSecond.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                        } else {
+                            binding.layoutRoom.textviewThird.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                        }
+                    }
                 }
             });
         }
@@ -87,6 +98,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("제1열람실 A (" + emptySeats[0] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("제1열람실 B (" + emptySeats[1] + "/100)");
                     binding.layoutRoom.textviewThird.setText("제1열람실 노트북석 (" + emptySeats[2] + "/100)");
+                    select = 0;
                 }
 
             }
@@ -99,6 +111,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("CRETEC Zone (" + emptySeats[3] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("S-Lounge (" + emptySeats[4] + "/100)");
                     binding.layoutRoom.textviewThird.setText("캐럴 (" + emptySeats[5] + "/100)");
+                    select = 1;
                 }
             }
         });
@@ -110,6 +123,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("제2열람실 A (" + emptySeats[6] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("제2열람실 B (" + emptySeats[7] + "/100)");
                     binding.layoutRoom.textviewThird.setText("제2열람실 C (" + emptySeats[8] + "/100)");
+                    select = 2;
                 }
             }
         });
@@ -121,6 +135,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("제3열람실 A (" + emptySeats[9] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("제3열람실 B (" + emptySeats[10] + "/100)");
                     binding.layoutRoom.textviewThird.setText("제3열람실 C (" + emptySeats[11] + "/100)");
+                    select = 3;
                 }
             }
         });
@@ -132,6 +147,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("제4열람실 A (" + emptySeats[12] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("제4열람실 B (" + emptySeats[13] + "/100)");
                     binding.layoutRoom.textviewThird.setText("제4열람실 C (" + emptySeats[14] + "/100)");
+                    select = 4;
                 }
             }
         });
@@ -194,7 +210,7 @@ public class SearchSeatActivity extends AppCompatActivity {
     private String getRoomName(TextView textView) {
         String a = textView.getText().toString();
         int index = a.indexOf("(");
-        a=a.substring(0, index);
+        a = a.substring(0, index);
         a = a.replaceAll(" ", "");
         return a;
     }

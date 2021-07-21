@@ -1,24 +1,32 @@
 package com.hackathon.ramus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hackathon.ramus.Model.Seat;
+import com.hackathon.ramus.Viewmodel.StudyRoomViewModel;
 import com.hackathon.ramus.databinding.ActivityStudyRoomBinding;
+
+import java.util.List;
 
 public class StudyRoomActivity extends AppCompatActivity {
     private ActivityStudyRoomBinding binding;
     private Button[] seats = new Button[100];
     private GridLayout.LayoutParams params;
     private String roomName;
+    private StudyRoomViewModel viewModel;
+    private List<Seat> seatsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +36,6 @@ public class StudyRoomActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         roomName = intent.getStringExtra("roomname");
-        Toast.makeText(this, roomName, Toast.LENGTH_SHORT).show();
         init();
 
        /* binding.seatGridlayout.getLayoutParams().columnSpec =
@@ -40,12 +47,31 @@ public class StudyRoomActivity extends AppCompatActivity {
     }
 
     private void init() {
+        viewModel = new StudyRoomViewModel();
+        viewModel.init(this);
 
         for (int i = 0; i < 100; i++) {
             seats[i] = new Button(this);
-            seats[i].setText(i+1 + "");
+            int finalI = i;
+            seats[i].setText(i + 1 + "");
             binding.seatGridlayout.addView(seats[i]);
         }
+
+        viewModel.getSpecificRoomListData(roomName).observe(this, new Observer<List<Seat>>() {
+            @Override
+            public void onChanged(List<Seat> seatList) {
+                seatsData=seatList;
+                for(int i=0;i<seatList.size();i++){
+                    int index = Integer.parseInt(seatList.get(i).getSeatKey().substring(roomName.length()));
+                    if(seatList.get(i).getSeatReservationEndTime()<System.currentTimeMillis()){
+                        seats[index-1].setText("예약가능");
+                    }else{
+                        seats[index-1].setText("예약불가");
+                    }
+
+                }
+            }
+        });
         /*params = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, 1f),
                 GridLayout.spec(GridLayout.UNDEFINED, 1f));
