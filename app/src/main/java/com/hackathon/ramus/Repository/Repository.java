@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.hackathon.ramus.Model.Seat;
@@ -102,4 +104,15 @@ public class Repository {
         db.collection(COLLECTION_NAME_OF_SEATS).document(seat.getSeatKey()).set(map, SetOptions.merge());
     }
 
+    public LiveData isUserRegistered(String email){
+        return new FireStoreOnceLiveData(db.collection(COLLECTION_NAME_OF_USERS),User.class,email);
+    }
+
+    public void addSeatHistoryToUser(String userKey,Seat seatHistoryToAdd){
+        DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
+        documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
+    }
+
+
 }
+

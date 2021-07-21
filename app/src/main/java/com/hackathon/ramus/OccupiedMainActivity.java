@@ -16,7 +16,10 @@ import com.hackathon.ramus.databinding.ActivityOccupiedMainBinding;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
+import static com.hackathon.ramus.Constants.TYPE_KB;
 import static com.hackathon.ramus.Constants.TYPE_KNU;
+import static com.hackathon.ramus.Constants.TYPE_MOHW;
+import static com.hackathon.ramus.Constants.TYPE_NAVER;
 
 public class OccupiedMainActivity extends AppCompatActivity {
     private ActivityOccupiedMainBinding binding;
@@ -42,7 +45,6 @@ public class OccupiedMainActivity extends AppCompatActivity {
             }
         });
 
-
         binding.layoutCoronaWeb.daeguWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,12 +63,41 @@ public class OccupiedMainActivity extends AppCompatActivity {
             }
         });
 
-        binding.layoutCoronaWeb.daegu4.setOnClickListener(new View.OnClickListener() {
+        binding.layoutCoronaWeb.gbWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KB);
+                startActivity(intent);
+            }
+        });
+
+        binding.layoutCoronaWeb.mohwWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_MOHW);
+                startActivity(intent);
+            }
+        });
+
+        binding.layoutCoronaWeb.imageDeaguSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
             }
         });
+
+
+        binding.layoutCoronaWeb.naverWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_NAVER);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

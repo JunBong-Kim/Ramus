@@ -69,10 +69,6 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
         checkForFirstStart();
         setClickListeners();
 
-
-
-
-
     }
 
     private void setClickListeners(){
@@ -159,7 +155,7 @@ public class EmailAuthLoginActivity extends AppCompatActivity {
     }
 
 
-    private class JavaMail extends AsyncTask<Void,Void,Void> {
+    private  class JavaMail extends AsyncTask<Void,Void,Void> {
 
         //Add those line in dependencies
         //implementation files('libs/activation.jar')

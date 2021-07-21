@@ -19,7 +19,7 @@ public class Constants {
     public static final String FIELD_NAME_SEAT_RESERVATION_END_TIME = "seatReservationEndTime";
     public static final String FIELD_NAME_USER_USER_SEAT = "userSeat";
     public static final String FIELD_NAME_SEAT_ROOM_NAME = "roomName";
-
+    public static final String FIELD_NAME_USER_SEAT_HISTORY = "seatHistoryList";
 
 
     public static final String INTENT_DATA_NUMBER = "INTENT_DATA_NUMBER";
@@ -30,7 +30,9 @@ public class Constants {
 
     public static final int TYPE_KNU = 0;
     public static final int TYPE_DAEGU = 1;
-
+    public static final int TYPE_KB = 2;
+    public static final int TYPE_MOHW = 3;
+    public static final int TYPE_NAVER = 4;
 
     /*
 

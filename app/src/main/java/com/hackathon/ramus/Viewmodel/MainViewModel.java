@@ -40,4 +40,9 @@ public class MainViewModel extends ViewModel {
     public void setSeatData(Seat seat) {
         Repository.getInstance(mContext).setSeatData(seat);
     }
+
+    public void addSeatHistoryToUser(String userKey,Seat seatHistoryToAdd) {
+        Repository.getInstance(mContext).addSeatHistoryToUser(userKey,seatHistoryToAdd);
+    }
+
 }

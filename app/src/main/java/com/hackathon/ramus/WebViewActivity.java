@@ -12,7 +12,10 @@ import com.hackathon.ramus.databinding.ActivityWebViewBinding;
 
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
+import static com.hackathon.ramus.Constants.TYPE_KB;
 import static com.hackathon.ramus.Constants.TYPE_KNU;
+import static com.hackathon.ramus.Constants.TYPE_MOHW;
+import static com.hackathon.ramus.Constants.TYPE_NAVER;
 import static com.hackathon.ramus.MainActivity.*;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -48,8 +51,17 @@ public class WebViewActivity extends AppCompatActivity {
             case TYPE_DAEGU:
                 binding.webview.loadUrl("http://covid19.daegu.go.kr/00937420.html");
                 break;
+            case TYPE_KB:
+                binding.webview.loadUrl("https://gb.go.kr/corona_main.htm");
+                break;
+            case TYPE_MOHW:
+                binding.webview.loadUrl("http://ncov.mohw.go.kr/");
+                break;
+            case TYPE_NAVER:
+                binding.webview.loadUrl("https://m.news.naver.com/covid19/live.nhn");
             default:
                 break;
+
         }
     }
 }

@@ -90,7 +90,17 @@
                     android:layout_height="wrap_content"
                     android:text="인증번호 다시보내기"
                     />
+                <TextView
+                    android:text="스팸메일 함도 확인해 주세요!"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/spoqahansans_regular"
+                    android:textColor="@color/text_second"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
+
+
         </LinearLayout>
 
 

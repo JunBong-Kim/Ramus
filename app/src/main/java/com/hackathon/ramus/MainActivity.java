@@ -34,7 +34,10 @@ import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_KEY;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_RESERVATION_END_TIME;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
+import static com.hackathon.ramus.Constants.TYPE_KB;
 import static com.hackathon.ramus.Constants.TYPE_KNU;
+import static com.hackathon.ramus.Constants.TYPE_MOHW;
+import static com.hackathon.ramus.Constants.TYPE_NAVER;
 
 public class MainActivity extends AppCompatActivity implements MyListener {
 
@@ -43,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private String userKey;
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,24 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
+        binding.layoutCoronaWeb.gbWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KB);
+                startActivity(intent);
+            }
+        });
+
+        binding.layoutCoronaWeb.mohwWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_MOHW);
+                startActivity(intent);
+            }
+        });
+
         binding.layoutCoronaWeb.imageDeaguSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,12 +121,25 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
+
+        binding.layoutCoronaWeb.naverWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_NAVER);
+                startActivity(intent);
+            }
+        });
+
+
         binding.layoutMainFunction.layoutSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),SearchSeatActivity.class));
             }
         });
+
+
     }
 
 
@@ -165,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         Log.e(TAG, "notifyPositiveButtonClick: "+seatReservationEndTime +"\n" +seatKey);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        seatKey = "1열람실23";
+        seatKey = "CRETECZONE1";
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
 
         db.collection(COLLECTION_NAME_OF_USERS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -182,20 +214,19 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
                         //현재 좌석에 나의 키를 배정
                         viewModel.updateSeatNewUserKeyAndNewEndTime(seatKey, userKey, seatReservationEndTime);
+
                     }else{
                         viewModel.setSeatData(new Seat(seatKey,userKey,seatReservationEndTime));
                         viewModel.updateUserNewSeatKey(userKey,seatKey);
                     }
+                    String roomNumber = seatKey.replaceAll("\\D+","");
+
+                    Seat seat = new Seat(seatKey,userKey,seatReservationEndTime,roomNumber);
+                    viewModel.addSeatHistoryToUser(userKey,seat);
                 }
             }
         });
 
-        /*
-        public static final String FIELD_NAME_SEAT_KEY = "seatKey";
-    public static final String FIELD_NAME_SEAT_USER_KEY = "seatUserKey";
-    public static final String FIELD_NAME_SEAT_RESERVATION_END_TIME = "seatReservationEndTime";
-
-         */
 
     }
 }

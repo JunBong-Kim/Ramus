@@ -27,11 +27,7 @@
             tools:replace="screenOrientation" />
         <activity android:name=".EmailSignUpActivity" />
         <activity android:name=".EmailAuthLoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MaintestActivity">
 
@@ -39,6 +35,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".SearchSeatActivity">
+        </activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity android:name=".StudyRoomActivity"/>
 

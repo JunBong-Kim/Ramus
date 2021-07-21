@@ -11,6 +11,13 @@ public class Seat {
 
     }
 
+    public Seat(String seatKey, String seatUserKey, long seatReservationEndTime, String roomName) {
+        this.seatKey = seatKey;
+        this.seatUserKey = seatUserKey;
+        this.seatReservationEndTime = seatReservationEndTime;
+        this.roomName = roomName;
+    }
+
     public Seat(String seatKey, String seatUserKey, long seatReservationEndTime) {
         this.seatKey = seatKey;
         this.seatUserKey = seatUserKey;
