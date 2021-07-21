@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 if (!task.isSuccessful()) {
                     return;
                 }
+                Log.d("token", task.getResult() + "");
                 String token = task.getResult();
                 viewModel.updateFcmToken(userKey, token);
             }
@@ -219,6 +220,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     binding.layoutMainFunction.textViewUserName.setText(user.getUserName());
                     binding.layoutMainFunction.textViewStudentId.setText(user.getUserStudentNumber());
                 }
+
+                Log.e(TAG, "onChanged: " + user.getUserFcmToken() );
             }
         };
 

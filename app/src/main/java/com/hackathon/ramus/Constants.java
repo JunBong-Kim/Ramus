@@ -34,6 +34,9 @@ public class Constants {
     public static final int TYPE_MOHW = 3;
     public static final int TYPE_NAVER = 4;
 
+
+    public static final int SEAT_TYPE_NO = 0;
+    public static final int SEAT_TYPE_YES= 1;
     /*
 
 
