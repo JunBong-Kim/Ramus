@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     Observer<User> observer;
 
     private boolean flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,16 +81,17 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 }
                 Log.d("token", task.getResult() + "");
                 String token = task.getResult();
+                Log.d("token", task.getResult() + "");
                 viewModel.updateFcmToken(userKey, token);
             }
         });
-        Log.e(TAG, "onCreate: 몇번이 호출 되는 거지 " );
+        Log.e(TAG, "onCreate: 몇번이 호출 되는 거지 ");
 
         observe();
         setListeners();
     }
 
-    private void setListeners(){
+    private void setListeners() {
         binding.layoutMainFunction.layoutQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_DAEGU);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_DAEGU);
                 startActivity(intent);
             }
         });
@@ -112,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutCoronaWeb.knuWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KNU);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_KNU);
                 startActivity(intent);
             }
         });
@@ -121,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutCoronaWeb.gbWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KB);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_KB);
                 startActivity(intent);
             }
         });
@@ -130,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutCoronaWeb.mohwWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_MOHW);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_MOHW);
                 startActivity(intent);
             }
         });
@@ -139,28 +141,28 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutCoronaWeb.imageDeaguSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
+                startActivity(new Intent(getApplicationContext(), DaeguCovidConfirmationActivity.class));
             }
         });
         binding.layoutCoronaWeb.naverWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_NAVER);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_NAVER);
                 startActivity(intent);
             }
         });
         binding.layoutMainFunction.layoutSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),SearchSeatActivity.class));
+                startActivity(new Intent(getApplicationContext(), SearchSeatActivity.class));
             }
         });
         binding.layoutMainFunction.laoutMyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MyHistoryActivity.class);
-                intent.putExtra(INTENT_DATA_EMAIL,userKey);
+                Intent intent = new Intent(getApplicationContext(), MyHistoryActivity.class);
+                intent.putExtra(INTENT_DATA_EMAIL, userKey);
                 startActivity(intent);
             }
         });
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW)
                         .setData(Uri.parse("https://www.youtube.com/channel/UCRk-80t6-G4_RE2hzDdUPTA")) // edit this url
-                        .setPackage("com.google.android.youtube"));	// do not edit
+                        .setPackage("com.google.android.youtube"));    // do not edit
             }
         });
         binding.instagram.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
 
-
     private void init() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -209,14 +210,14 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         observer = new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                if(!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
-                    if(flag)return;
+                if (!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
+                    if (flag) return;
                     flag = true;
-                    Log.e(TAG, "startActivity 호출" );
+                    Log.e(TAG, "startActivity 호출");
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
 
-                }else{
+                } else {
                     binding.layoutMainFunction.textViewUserName.setText(user.getUserName());
                     binding.layoutMainFunction.textViewStudentId.setText(user.getUserStudentNumber());
                 }
@@ -229,19 +230,18 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if(result.getContents() == null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 // todo
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 seatKey = result.getContents();
-                BottomDialogConfirmSeatBinding binding=BottomDialogConfirmSeatBinding.inflate(getLayoutInflater());
-                BottomSheetDialog dialog = new ConfirmSeatDialog(this,binding);
+                BottomDialogConfirmSeatBinding binding = BottomDialogConfirmSeatBinding.inflate(getLayoutInflater());
+                BottomSheetDialog dialog = new ConfirmSeatDialog(this, binding);
                 dialog.setContentView(binding.getRoot());
                 dialog.show();
                 dialog.setCancelable(false);
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
     @Override
     public void notifyPositiveButtonClick(long seatReservationEndTime) {
-        Log.e(TAG, "notifyPositiveButtonClick: "+seatReservationEndTime +"\n" +seatKey);
+        Log.e(TAG, "notifyPositiveButtonClick: " + seatReservationEndTime + "\n" + seatKey);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         seatKey = "CRETECZONE10";
@@ -263,29 +263,29 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if(document.exists()) {
+                    if (document.exists()) {
                         String seatKey = String.valueOf(document.getData().get(FIELD_NAME_SEAT_KEY));
                         long seatReservationEndTime = Long.valueOf(String.valueOf(document.getData().get(FIELD_NAME_SEAT_RESERVATION_END_TIME)));
                         //자리가 있을때는, 상대방의 키 없애고,
-                         String alreadySeatUserKey = document.getData().get(FIELD_NAME_SEAT_USER_KEY).toString();
+                        String alreadySeatUserKey = document.getData().get(FIELD_NAME_SEAT_USER_KEY).toString();
                         if (seatReservationEndTime > System.currentTimeMillis() && !alreadySeatUserKey.equals(DATA_USER_SEAT_NULL)) {
                             viewModel.updateUserNewSeatKey(alreadySeatUserKey, DATA_USER_SEAT_NULL);
                         }
 
                         //현재 좌석에 나의 키를 배정
                         viewModel.updateSeatNewUserKeyAndNewEndTime(seatKey, userKey, seatReservationEndTime);
-                        viewModel.updateUserNewSeatKey(userKey,seatKey);
+                        viewModel.updateUserNewSeatKey(userKey, seatKey);
 
-                    }else{
-                        viewModel.setSeatData(new Seat(seatKey,userKey,seatReservationEndTime));
-                        viewModel.updateUserNewSeatKey(userKey,seatKey);
+                    } else {
+                        viewModel.setSeatData(new Seat(seatKey, userKey, seatReservationEndTime));
+                        viewModel.updateUserNewSeatKey(userKey, seatKey);
                     }
 
-                    String roomNumber = seatKey.replaceAll("\\D+","");
-                    Seat seat = new Seat(seatKey,userKey,seatReservationEndTime,roomNumber,System.currentTimeMillis());
-                    viewModel.addSeatHistoryToUser(userKey,seat);
+                    String roomNumber = seatKey.replaceAll("\\D+", "");
+                    Seat seat = new Seat(seatKey, userKey, seatReservationEndTime, roomNumber, System.currentTimeMillis());
+                    viewModel.addSeatHistoryToUser(userKey, seat);
                 }
             }
         });

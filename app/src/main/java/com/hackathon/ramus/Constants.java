@@ -7,8 +7,6 @@ public class Constants {
     public static final String COLLECTION_NAME_OF_SEATS = "SEATS";
 
 
-
-
     //user Table Field Name
     public static final String FILED_NAME_USER_NAME = "userName";
     public static final String FILED_NAME_USER_FCM_TOKEN = "userFcmToken";
@@ -17,14 +15,15 @@ public class Constants {
     public static final String FIELD_NAME_SEAT_KEY = "seatKey";
     public static final String FIELD_NAME_SEAT_USER_KEY = "seatUserKey";
     public static final String FIELD_NAME_SEAT_RESERVATION_END_TIME = "seatReservationEndTime";
+    public static final String FIELD_NAME_SEAT_RESERVATION_START_TIME = "seatReservationStartTime";
     public static final String FIELD_NAME_USER_USER_SEAT = "userSeat";
     public static final String FIELD_NAME_SEAT_ROOM_NAME = "roomName";
     public static final String FIELD_NAME_USER_SEAT_HISTORY = "seatHistoryList";
 
 
     public static final String INTENT_DATA_NUMBER = "INTENT_DATA_NUMBER";
-    public static final String INTENT_DATA_EMAIL ="INTENT_DATA_EMAIL";
-    public static final String INTENT_DATA_WEB_VIEW_TYPE= "INTENT_DATA_WEB_VIEW_TYPE";
+    public static final String INTENT_DATA_EMAIL = "INTENT_DATA_EMAIL";
+    public static final String INTENT_DATA_WEB_VIEW_TYPE = "INTENT_DATA_WEB_VIEW_TYPE";
 
     public static final String DATA_USER_SEAT_NULL = "NULL";
 

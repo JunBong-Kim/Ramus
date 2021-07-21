@@ -108,12 +108,13 @@ public class StudyRoomActivity extends AppCompatActivity {
     }
 
     private void observe(){
-        viewModel.getSpecificRoomListData(roomName).observe(this, new Observer<List<Seat>>() {
+        viewModel.getSpecificRoomListData(roomName,"roomName").observe(this, new Observer<List<Seat>>() {
             @Override
             public void onChanged(List<Seat> seats) {
                 for(int i=0;i<seats.size();i++) Log.e(TAG, "onChanged: "+seats.get(i).getRoomName());
             }
         });
     }
+
 
 }

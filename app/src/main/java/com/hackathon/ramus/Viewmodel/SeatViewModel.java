@@ -27,7 +27,7 @@ public class SeatViewModel extends ViewModel {
         mContext = context;
     }
 
-    public LiveData<List<Seat>> getSpecificRoomListData(String roomName) {
-        return Repository.getInstance(mContext).getSpecificRoomListData(roomName);
+    public LiveData<List<Seat>> getSpecificRoomListData(String roomName, String fieldName) {
+        return Repository.getInstance(mContext).getSpecificRoomListData(roomName, fieldName);
     }
 }

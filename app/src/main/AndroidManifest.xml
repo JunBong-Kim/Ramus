@@ -55,6 +55,7 @@
         </service>
 
         <activity android:name=".MyHistoryActivity"/>
+        <activity android:name=".FindBadStudentActivity"/>
 
     </application>
 

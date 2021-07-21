@@ -77,8 +77,9 @@ public class Repository {
     public void initdata(Seat seat) {
         Map<String, Object> map = new HashMap<>();
         map.put(FIELD_NAME_SEAT_KEY, seat.getSeatKey());
-        map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME, 0);
-        map.put(FIELD_NAME_SEAT_USER_KEY, "NULL");
+        map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME, seat.getSeatReservationEndTime());
+        map.put(FIELD_NAME_SEAT_RESERVATION_START_TIME, seat.getSeatReservationStartTime());
+        map.put(FIELD_NAME_SEAT_USER_KEY, seat.getSeatUserKey());
         map.put(FIELD_NAME_SEAT_ROOM_NAME, seat.getRoomName());
         db.collection(COLLECTION_NAME_OF_SEATS).document(seat.getSeatKey()).set(map, SetOptions.merge());
     }
@@ -91,8 +92,8 @@ public class Repository {
         return new FireStoreLiveData<>(db.collection(COLLECTION_NAME_OF_USERS).document(userKey), User.class, DOCUMENT);
     }
 
-    public LiveData<List<Seat>> getSpecificRoomListData(String roomName) {
-        return new FireStoreLiveData<List<Seat>>(db.collection(COLLECTION_NAME_OF_SEATS).whereEqualTo("roomName", roomName), Seat.class, QUERY);
+    public LiveData<List<Seat>> getSpecificRoomListData(String roomName, String fieldName) {
+        return new FireStoreLiveData<List<Seat>>(db.collection(COLLECTION_NAME_OF_SEATS).whereEqualTo(fieldName, roomName), Seat.class, QUERY);
     }
 
 
@@ -105,17 +106,14 @@ public class Repository {
         db.collection(COLLECTION_NAME_OF_SEATS).document(seat.getSeatKey()).set(map, SetOptions.merge());
     }
 
-    public LiveData isUserRegistered(String email){
-        return new FireStoreOnceLiveData(db.collection(COLLECTION_NAME_OF_USERS),User.class,email);
+    public LiveData isUserRegistered(String email) {
+        return new FireStoreOnceLiveData(db.collection(COLLECTION_NAME_OF_USERS), User.class, email);
     }
 
-    public void addSeatHistoryToUser(String userKey,Seat seatHistoryToAdd){
+    public void addSeatHistoryToUser(String userKey, Seat seatHistoryToAdd) {
         DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
         documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
     }
-
-
-
 
 
 }

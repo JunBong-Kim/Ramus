@@ -30,7 +30,8 @@ import static com.hackathon.ramus.Constants.TYPE_NAVER;
 public class OccupiedMainActivity extends AppCompatActivity {
     private ActivityOccupiedMainBinding binding;
     private OccupiedMainViewModel viewModel;
-    private String userKey,userSeat;
+    private String userKey, userSeat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +40,21 @@ public class OccupiedMainActivity extends AppCompatActivity {
         setClickListeners();
     }
 
-    private void setClickListeners(){
+    private void setClickListeners() {
         binding.layoutMain2Function.layoutFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //seatReservationTime 에 있는 시간을 현재 시간으로 바꾸고,
                 //seatUserKey 도 NULL 로 바꾸고
-                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat,DATA_USER_SEAT_NULL,System.currentTimeMillis());
+                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat, DATA_USER_SEAT_NULL, System.currentTimeMillis());
                 //userSeat 도 NULL 로 바꾼다
-                viewModel.updateUserNewSeatKey(userKey,DATA_USER_SEAT_NULL);
+                viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
+            }
+        });
+        binding.layoutMain2Function.layoutReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OccupiedMainActivity.this, FindBadStudentActivity.class));
             }
         });
 
@@ -55,7 +62,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_DAEGU);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_DAEGU);
                 startActivity(intent);
             }
         });
@@ -63,8 +70,8 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutCoronaWeb.knuWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KNU);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_KNU);
                 startActivity(intent);
             }
         });
@@ -72,8 +79,8 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutCoronaWeb.gbWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_KB);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_KB);
                 startActivity(intent);
             }
         });
@@ -81,8 +88,8 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutCoronaWeb.mohwWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_MOHW);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_MOHW);
                 startActivity(intent);
             }
         });
@@ -90,7 +97,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutCoronaWeb.imageDeaguSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
+                startActivity(new Intent(getApplicationContext(), DaeguCovidConfirmationActivity.class));
             }
         });
 
@@ -98,8 +105,8 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutCoronaWeb.naverWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
-                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_NAVER);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE, TYPE_NAVER);
                 startActivity(intent);
             }
         });
@@ -132,28 +139,28 @@ public class OccupiedMainActivity extends AppCompatActivity {
 
     }
 
-    private void observe(){
+    private void observe() {
 
         viewModel.getSpecificUserLiveData(userKey).observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                if(user.getUserSeat().equals(DATA_USER_SEAT_NULL)){
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                if (user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
-                }else{
-                    binding.layoutMain2Function.textViewUserName.setText(user.getUserName() );
+                } else {
+                    binding.layoutMain2Function.textViewUserName.setText(user.getUserName());
                     userSeat = user.getUserSeat();
 
                     ArrayList<Seat> seats = user.getSeatHistoryList();
-                    Seat recentSeat = seats.get(seats.size()-1);
+                    Seat recentSeat = seats.get(seats.size() - 1);
 
                     binding.layoutMain2Function.textViewTime.setText(HH_mm_format_day(recentSeat.getSeatReservationStartTime())
-                    +" ~ " + HH_mm_format_day(recentSeat.getSeatReservationEndTime()));
+                            + " ~ " + HH_mm_format_day(recentSeat.getSeatReservationEndTime()));
 
-                    if(System.currentTimeMillis() > recentSeat.getSeatReservationEndTime()){
+                    if (System.currentTimeMillis() > recentSeat.getSeatReservationEndTime()) {
                         binding.layoutMain2Function.textViewSeat.setText("좌석을 반납 해 주세요!");
                         binding.layoutMain2Function.textViewSeat.setTextColor(Color.RED);
-                    }else{
+                    } else {
                         binding.layoutMain2Function.textViewSeat.setText(userSeat);
                     }
                 }
@@ -161,13 +168,13 @@ public class OccupiedMainActivity extends AppCompatActivity {
         });
     }
 
-    private String HH_mm_format_day(long time){
+    private String HH_mm_format_day(long time) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(" HH:mm");
         return dateFormat.format(time);
     }
 
 
-    private void init(){
+    private void init() {
         binding = ActivityOccupiedMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

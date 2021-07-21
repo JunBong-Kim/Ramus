@@ -21,10 +21,12 @@ import com.hackathon.ramus.Dialog.ConfirmSeatDialog;
 import com.hackathon.ramus.Dialog.MyListener;
 import com.hackathon.ramus.Model.NotificationData;
 import com.hackathon.ramus.Model.NotificationModel;
+import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Notification.APIService;
 import com.hackathon.ramus.Notification.Client;
 import com.hackathon.ramus.Notification.MyResponse;
 import com.hackathon.ramus.Notification.SendNotification;
+import com.hackathon.ramus.Repository.Repository;
 import com.hackathon.ramus.Viewmodel.Main2Viewmodel;
 import com.hackathon.ramus.databinding.ActivityMain2Binding;
 
@@ -52,18 +54,7 @@ public class MainActivity2 extends AppCompatActivity {
         binding.userEnrollBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendNotification sendNotification = new SendNotification("token");
-                sendNotification.send(new Callback<MyResponse>() {
-                    @Override
-                    public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<MyResponse> call, Throwable t) {
-
-                    }
-                });
+                //SendNotification sendNotification = new SendNotification("token");
             }
         });
 
@@ -102,8 +93,14 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });*/
     }
-
-
+/*
+for (int i = 0; i < 15; i++) {
+        for (int j = 0; j < 100; j++) {
+            String a = j < 10 ? "0" + j : j + "";
+            Seat seat = new Seat(testString[i] +a, "NULL", 0, testString[i], 0);
+            Repository.getInstance(this).initdata(seat);
+        }
+    }*/
 
 
 
