@@ -39,6 +39,8 @@ import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
 
 import java.lang.reflect.Field;
 
+import java.util.Observable;
+
 import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_USERS;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_KEY;
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private String userKey;
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
+    Observer<User> observer;
 
+    private boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 viewModel.updateFcmToken(userKey, token);
             }
         });
+        Log.e(TAG, "onCreate: 몇번이 호출 되는 거지 " );
 
         observe();
         setListeners();
@@ -162,26 +167,29 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.init(MainActivity.this);
-
         userKey = SharedPreferenceManager.getEmail(MainActivity.this, SharedPreferenceManager.KNU_EMAIL);
     }
 
     private void observe() {
-        viewModel.getSpecificUserLiveData(userKey).observe(this, new Observer<User>() {
+        observer = new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 if(!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
+                    if(flag)return;
+                    flag = true;
+                    Log.e(TAG, "startActivity 호출" );
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
+
                 }else{
                     binding.layoutMainFunction.textViewUserName.setText(user.getUserName());
                     binding.layoutMainFunction.textViewStudentId.setText(user.getUserStudentNumber());
                 }
             }
-        });
+        };
 
+        viewModel.getSpecificUserLiveData(userKey).observe(this, observer);
     }
-
 
 
 
@@ -225,17 +233,15 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                         //자리가 있을때는, 상대방의 키 없애고,
                         if (seatReservationEndTime > System.currentTimeMillis())
                             viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
-
                         //현재 좌석에 나의 키를 배정
-                        viewModel.updateSeatNewUserKeyAndNewEndTime(seatKey, userKey, seatReservationEndTime);
 
+                        viewModel.updateSeatNewUserKeyAndNewEndTime(seatKey, userKey, seatReservationEndTime);
                     }else{
                         viewModel.setSeatData(new Seat(seatKey,userKey,seatReservationEndTime));
                         viewModel.updateUserNewSeatKey(userKey,seatKey);
                     }
                     String roomNumber = seatKey.replaceAll("\\D+","");
-
-                    Seat seat = new Seat(seatKey,userKey,seatReservationEndTime,roomNumber);
+                    Seat seat = new Seat(seatKey,userKey,seatReservationEndTime,roomNumber,System.currentTimeMillis());
                     viewModel.addSeatHistoryToUser(userKey,seat);
                 }
             }
