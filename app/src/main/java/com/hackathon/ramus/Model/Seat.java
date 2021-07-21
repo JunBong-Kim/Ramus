@@ -5,6 +5,11 @@ public class Seat {
     private String seatKey;
     private String seatUserKey;
     private long seatReservationEndTime;
+    private String roomName;
+
+    public Seat() {
+
+    }
 
     public Seat(String seatKey, String seatUserKey, long seatReservationEndTime) {
         this.seatKey = seatKey;
@@ -34,5 +39,13 @@ public class Seat {
 
     public void setSeatReservationEndTime(long seatReservationEndTime) {
         this.seatReservationEndTime = seatReservationEndTime;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

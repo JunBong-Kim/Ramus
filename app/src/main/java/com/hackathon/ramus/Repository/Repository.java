@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.hackathon.ramus.Model.Seat;
@@ -17,10 +18,15 @@ import com.hackathon.ramus.Model.User;
 
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.mail.Store;
+
 import static com.hackathon.ramus.Constants.*;
+import static com.hackathon.ramus.Repository.FireStoreLiveData.COLLECTION;
 import static com.hackathon.ramus.Repository.FireStoreLiveData.DOCUMENT;
+import static com.hackathon.ramus.Repository.FireStoreLiveData.QUERY;
 
 
 public class Repository {
@@ -41,25 +47,27 @@ public class Repository {
         map.put(FILED_NAME_USER_NAME, user.getUserName());
         map.put(FILED_NAME_USER_FCM_TOKEN, user.getUserFcmToken());
         map.put(FILED_NAME_USER_KEY, user.getUserKey());
-        map.put(FILED_NAME_USER_STUDENT_NUMBER,user.getUserStudentNumber());
-        map.put(FIELD_NAME_USER_USER_SEAT,DATA_USER_SEAT_NULL);
+        map.put(FILED_NAME_USER_STUDENT_NUMBER, user.getUserStudentNumber());
+        map.put(FIELD_NAME_USER_USER_SEAT, DATA_USER_SEAT_NULL);
         db.collection(COLLECTION_NAME_OF_USERS).document(user.getUserKey()).set(map, SetOptions.merge());
     }
-    public void updateFcmToken(String userKey,String token){
-        Map<String,Object> map = new HashMap<>();
-        map.put(FILED_NAME_USER_FCM_TOKEN,token);
+
+    public void updateFcmToken(String userKey, String token) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(FILED_NAME_USER_FCM_TOKEN, token);
         db.collection(COLLECTION_NAME_OF_USERS).document(userKey).update(map);
     }
 
-    public void updateUserNewSeatKey(String userKey,String userSeatKey){
-        Map<String,Object> map = new HashMap<>();
-        map.put(FIELD_NAME_USER_USER_SEAT,userSeatKey);
+    public void updateUserNewSeatKey(String userKey, String userSeatKey) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(FIELD_NAME_USER_USER_SEAT, userSeatKey);
         db.collection(COLLECTION_NAME_OF_USERS).document(userKey).update(map);
     }
-    public void  updateSeatNewUserKeyAndNewEndTime(String seatKey,String userKey,Long seatReservationEndTime){
-        Map<String,Object> map = new HashMap<>();
-        map.put(FIELD_NAME_SEAT_USER_KEY,userKey);
-        map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME,seatReservationEndTime);
+
+    public void updateSeatNewUserKeyAndNewEndTime(String seatKey, String userKey, Long seatReservationEndTime) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(FIELD_NAME_SEAT_USER_KEY, userKey);
+        map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME, seatReservationEndTime);
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).update(map);
     }
 
@@ -70,6 +78,11 @@ public class Repository {
     public LiveData<User> getSpecificUserData(String userKey) {
         return new FireStoreLiveData<>(db.collection(COLLECTION_NAME_OF_USERS).document(userKey), User.class, DOCUMENT);
     }
+
+    public LiveData<List<Seat>> getSpecificRoomListData(String roomName) {
+        return new FireStoreLiveData<List<Seat>>(db.collection(COLLECTION_NAME_OF_SEATS).whereEqualTo("roomName", roomName), Seat.class, QUERY);
+    }
+
 
     public void setSeatData(Seat seat) {
         Map<String, Object> map = new HashMap<>();

@@ -103,25 +103,7 @@ public class MainActivity2 extends AppCompatActivity {
         });*/
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            ConfirmSeatDialog dialog = new ConfirmSeatDialog(MainActivity2.this);
-            dialog.show();
 
-
-            /* if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-                // todo
-            } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                // todo
-            }*/
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 
 
 

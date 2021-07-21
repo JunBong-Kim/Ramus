@@ -18,6 +18,7 @@ public class Constants {
     public static final String FIELD_NAME_SEAT_USER_KEY = "seatUserKey";
     public static final String FIELD_NAME_SEAT_RESERVATION_END_TIME = "seatReservationEndTime";
     public static final String FIELD_NAME_USER_USER_SEAT = "userSeat";
+    public static final String FIELD_NAME_SEAT_ROOM_NAME = "roomName";
 
 
 
