@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             android:fontFamily="@font/spoqahansans_medium"
-            android:letterSpacing="-0.07"
+            android:letterSpacing="-0.04"
             android:text="Safe KNU"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqahansans_regular"
                 android:letterSpacing="-0.03"
-                android:text="확진 사실 알리기"
+                android:text="코로나 알리미"
                 android:textColor="@color/text_primary"
                 android:textFontWeight="600"
                 android:textSize="15sp" />
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqahansans_regular"
-                android:text="다른 도서관 이용자에게 확전정보 알려주기"
+                android:text="도서관 이용자에게 확진정보 알려주기"
                 android:textColor="@color/text_primary"
                 android:textSize="10sp" />
         </LinearLayout>

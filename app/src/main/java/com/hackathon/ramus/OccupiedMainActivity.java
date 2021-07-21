@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -100,6 +101,31 @@ public class OccupiedMainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
                 intent.putExtra(INTENT_DATA_WEB_VIEW_TYPE,TYPE_NAVER);
                 startActivity(intent);
+            }
+        });
+
+        binding.youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse("https://www.youtube.com/channel/UCRk-80t6-G4_RE2hzDdUPTA")) // edit this url
+                        .setPackage("com.google.android.youtube"));	// do not edit
+            }
+        });
+        binding.instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://www.instagram.com/knu.library/";
+                Intent Blog_Intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(Blog_Intent);
+            }
+        });
+        binding.facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://www.facebook.com/knulib/";
+                Intent Blog_Intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(Blog_Intent);
             }
         });
 

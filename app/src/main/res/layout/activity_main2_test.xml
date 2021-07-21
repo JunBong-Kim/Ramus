@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_third"
+    android:background="@color/background_primary"
     android:orientation="vertical">
 
 
@@ -19,14 +19,14 @@
         android:layout_height="0dp"
         >
         <LinearLayout
-            android:background="@color/background_third"
+            android:background="@color/background_primary"
             android:paddingBottom="30dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
           <LinearLayout
               android:elevation="3dp"
-              android:layout_marginBottom="6dp"
+              android:layout_marginBottom="2dp"
               android:background="@drawable/rec_main_primary"
               android:paddingBottom="40dp"
               android:layout_width="match_parent"
@@ -37,7 +37,8 @@
                   >
               </include>
           </LinearLayout>
-            <include layout="@layout/layout_safe_library"
+            <include
+                layout="@layout/layout_safe_library"
                 android:id="@+id/layout_safe_library">
             </include>
             <include layout="@layout/layout_corona_web"
@@ -47,7 +48,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:paddingTop="20dp"
-                android:background="@color/background_third"
+                android:background="@color/background_primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

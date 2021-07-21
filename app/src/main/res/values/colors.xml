@@ -33,6 +33,7 @@
 
     <color name="green_background">#F1FAF3</color>
     <color name="red_background">#FDECEC</color>
+    <color name="orange">#FFEFE2</color>
     <color name="gray_background">#F4F4F6</color>
 
     <color name="line_gray">#EAEAEA</color>

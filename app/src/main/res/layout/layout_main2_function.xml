@@ -42,7 +42,7 @@
                     android:letterSpacing="-0.05"
                     android:text="조준식"
                     android:textColor="@color/text_primary"
-                    android:textSize="25sp" />
+                    android:textSize="24sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     android:letterSpacing="-0.05"
                     android:text="님"
                     android:textColor="@color/text_primary"
-                    android:textSize="24sp" />
+                    android:textSize="23sp" />
                 <TextView
                     android:layout_marginLeft="12dp"
                     android:layout_width="wrap_content"

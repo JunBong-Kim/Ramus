@@ -9,7 +9,7 @@
             android:padding="10dp"
             android:shape="rectangle"
             >
-            <solid android:color="@color/red_background" />
+            <solid android:color="@color/orange" />
 
 
             <corners
