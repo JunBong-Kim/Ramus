@@ -32,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="제1열람실 노트북석 (87/100)"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -57,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="제1열람실 B (55/100)"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -79,11 +77,11 @@
         <TextView
             android:id="@+id/textview_first"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="9dp"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="제1열람실 A (100/100)"
             android:textColor="@color/text_primary"
-            android:textSize="17sp"></TextView>
+            android:textSize="17sp"
+            ></TextView>
     </LinearLayout>
 
 

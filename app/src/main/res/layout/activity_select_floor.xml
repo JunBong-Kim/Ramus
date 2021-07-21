@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="지하1층 (59/100)"
+            android:text="지하1층"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="1층 (100/100)"
+            android:text="1층"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="2층 (100/100)"
+            android:text="2층"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="3층 (66/100)"
+            android:text="3층"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
@@ -141,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqahansans_regular"
-            android:text="4층 (88/100)"
+            android:text="4층"
             android:textColor="@color/text_primary"
             android:textSize="17sp"></TextView>
     </LinearLayout>
