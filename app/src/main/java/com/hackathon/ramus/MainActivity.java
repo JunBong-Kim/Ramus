@@ -217,7 +217,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
 
-
     @Override
     public void notifyPositiveButtonClick(long seatReservationEndTime) {
         Log.e(TAG, "notifyPositiveButtonClick: "+seatReservationEndTime +"\n" +seatKey);

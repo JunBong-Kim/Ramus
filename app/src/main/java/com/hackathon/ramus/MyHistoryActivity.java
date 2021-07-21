@@ -51,6 +51,16 @@ public class MyHistoryActivity extends AppCompatActivity {
         adapter = new MySeatHistoryAdapter(MyHistoryActivity.this);
 
         binding.recyclerView.setAdapter(adapter);
+
+        binding.toolbar.setTitle("이용내역");
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

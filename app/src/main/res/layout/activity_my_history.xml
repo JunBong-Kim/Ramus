@@ -18,13 +18,13 @@
             android:elevation="0dp"
             app:elevation="0dp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="140dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleTextAppearance="@style/CollapsingToolbar.TitleText2"
             app:collapsedTitleTextAppearance="@style/Toolbar.TitleText2"
             android:background="@color/background_secondary"
             app:contentScrim="@color/background_secondary"
-            app:expandedTitleGravity="center|bottom"
+            app:expandedTitleGravity="left|bottom"
             android:fitsSystemWindows="true">
 
             <androidx.appcompat.widget.Toolbar
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content">
             <View
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="20dp">
             </View>
 
 

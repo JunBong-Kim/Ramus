@@ -38,16 +38,17 @@ public class MySeatHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((MyViewHolder)holder).textView_seat_name.setText(seat.getSeatKey());
          ((MyViewHolder)holder).textView_time.setText(HH_mm_format_day(seat.getSeatReservationStartTime()) +" ~ " +HH_mm_format_day(seat.getSeatReservationEndTime()));
         ((MyViewHolder)holder).textView_day.setText(MM_dd_format_day(seat.getSeatReservationStartTime()));
+
         Log.e(TAG, "onBindViewHolder: "  +MM_dd_format_day(seat.getSeatReservationStartTime()));
     }
 
     private String HH_mm_format_day(long time){
-        SimpleDateFormat dateFormat = new SimpleDateFormat(" HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH : mm");
         return dateFormat.format(time);
     }
 
     private String MM_dd_format_day(long time){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM:dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM월 dd일");
         return dateFormat.format(time);
     }
 
@@ -55,6 +56,7 @@ public class MySeatHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
         arrayList = list;
         notifyDataSetChanged();
     }
+
 
     /*
 

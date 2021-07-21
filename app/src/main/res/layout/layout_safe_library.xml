@@ -39,7 +39,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/rec_yellow"
+        android:background="@drawable/rec_gray_background"
         android:paddingLeft="20dp"
         android:paddingTop="0dp">
 
@@ -89,8 +89,8 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginHorizontal="26dp"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/rec_gray_background"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rec_yellow"
         android:paddingLeft="20dp"
         android:paddingTop="0dp">
 
