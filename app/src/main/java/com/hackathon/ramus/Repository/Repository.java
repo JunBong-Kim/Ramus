@@ -18,6 +18,7 @@ import com.google.firebase.firestore.SetOptions;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -112,6 +113,9 @@ public class Repository {
         DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
         documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
     }
+
+
+
 
 
 }

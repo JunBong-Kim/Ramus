@@ -32,10 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <include layout="@layout/layout_main_function"
+                <include
                     android:id="@+id/layout_main_function"
-                    >
-                </include>
+                    layout="@layout/layout_main_function"></include>
             </LinearLayout>
             <include layout="@layout/layout_safe_library"
                 android:id="@+id/layout_safe_library">

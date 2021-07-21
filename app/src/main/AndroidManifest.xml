@@ -54,6 +54,8 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".MyHistoryActivity"/>
+
     </application>
 
 </manifest>

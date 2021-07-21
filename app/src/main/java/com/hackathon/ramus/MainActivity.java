@@ -45,6 +45,7 @@ import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_USERS;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_KEY;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_RESERVATION_END_TIME;
+import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
 import static com.hackathon.ramus.Constants.TYPE_KB;
@@ -136,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
             }
         });
-
-
         binding.layoutCoronaWeb.naverWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,15 +145,20 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 startActivity(intent);
             }
         });
-
-
         binding.layoutMainFunction.layoutSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),SearchSeatActivity.class));
             }
         });
-
+        binding.layoutMainFunction.laoutMyinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MyHistoryActivity.class);
+                intent.putExtra(INTENT_DATA_EMAIL,userKey);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -219,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         Log.e(TAG, "notifyPositiveButtonClick: "+seatReservationEndTime +"\n" +seatKey);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        seatKey = "CRETECZONE1";
+        seatKey = "CRETECZONE10";
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
 
         db.collection(COLLECTION_NAME_OF_USERS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
