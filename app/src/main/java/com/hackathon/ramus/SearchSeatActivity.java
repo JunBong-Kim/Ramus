@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hackathon.ramus.Model.Seat;
+import com.hackathon.ramus.Repository.Repository;
 import com.hackathon.ramus.Viewmodel.EmailSignUpViewModel;
 import com.hackathon.ramus.Viewmodel.SeatViewModel;
 import com.hackathon.ramus.databinding.ActivityEmailSignUpBinding;
@@ -33,6 +34,8 @@ public class SearchSeatActivity extends AppCompatActivity {
     private ConstraintLayout constraintLayout1, constraintLayout2;
     private Animation animation, animation2;
     private int[] emptySeats = new int[15];
+    private String[] testString = {"제1열람실A", "제1열람실B", "제1열람실노트북석", "CRETECZONE", "S-Lounge", "캐럴", "제2열람실A", "제2열람실B"
+            , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
     FirebaseAuth mAuth;
 
     @Override
@@ -46,24 +49,23 @@ public class SearchSeatActivity extends AppCompatActivity {
         viewModel = new SeatViewModel();
         viewModel.init(this);
 
-        viewModel.getSpecificRoomListData("제1열람실A").observe(this, new Observer<List<Seat>>() {
-            @Override
-            public void onChanged(List<Seat> seats) {
-                emptySeats[0] = seats.size();
-            }
-        });
-        viewModel.getSpecificRoomListData("제1열람실B").observe(this, new Observer<List<Seat>>() {
-            @Override
-            public void onChanged(List<Seat> seats) {
-                emptySeats[1] = seats.size();
-            }
-        });
-        viewModel.getSpecificRoomListData("제1열람실노트북석").observe(this, new Observer<List<Seat>>() {
-            @Override
-            public void onChanged(List<Seat> seats) {
-                emptySeats[2] = seats.size();
-            }
-        });
+        for (int i = 0; i < 15; i++) {
+            int finalI = i;
+            viewModel.getSpecificRoomListData(testString[i]).observe(this, new Observer<List<Seat>>() {
+                @Override
+                public void onChanged(List<Seat> seats) {
+                    int cnt = 0;
+                    long time = System.currentTimeMillis();
+                    for (int j = 0; j < seats.size(); j++) {
+                        if (seats.get(j).getSeatReservationEndTime() < time) {
+                            cnt++;
+                        }
+                    }
+                    emptySeats[finalI] = cnt;
+                }
+            });
+        }
+
 
     }
 
@@ -92,9 +94,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("CRETEC Zone (100/100)");
-                    binding.layoutRoom.textviewSecond.setText("S-Lounge (66/100)");
-                    binding.layoutRoom.textviewThird.setText("캐럴 (58/100)");
+                    binding.layoutRoom.textviewFirst.setText("CRETEC Zone (" + emptySeats[3] + "/100)");
+                    binding.layoutRoom.textviewSecond.setText("S-Lounge (" + emptySeats[4] + "/100)");
+                    binding.layoutRoom.textviewThird.setText("캐럴 (" + emptySeats[5] + "/100)");
                 }
             }
         });
@@ -103,9 +105,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제2열람실 A (100/100)");
-                    binding.layoutRoom.textviewSecond.setText("제2열람실 B (66/100)");
-                    binding.layoutRoom.textviewThird.setText("제2열람실 C (58/100)");
+                    binding.layoutRoom.textviewFirst.setText("제2열람실 A (" + emptySeats[6] + "/100)");
+                    binding.layoutRoom.textviewSecond.setText("제2열람실 B (" + emptySeats[7] + "/100)");
+                    binding.layoutRoom.textviewThird.setText("제2열람실 C (" + emptySeats[8] + "/100)");
                 }
             }
         });
@@ -114,9 +116,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (100/100)");
-                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (66/100)");
-                    binding.layoutRoom.textviewThird.setText("제3열람실 C (58/100)");
+                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (" + emptySeats[9] + "/100)");
+                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (" + emptySeats[10] + "/100)");
+                    binding.layoutRoom.textviewThird.setText("제3열람실 C (" + emptySeats[11] + "/100)");
                 }
             }
         });
@@ -125,9 +127,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (100/100)");
-                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (66/100)");
-                    binding.layoutRoom.textviewThird.setText("제3열람실 C (58/100)");
+                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (" + emptySeats[12] + "/100)");
+                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (" + emptySeats[13] + "/100)");
+                    binding.layoutRoom.textviewThird.setText("제3열람실 C (" + emptySeats[14] + "/100)");
                 }
             }
         });

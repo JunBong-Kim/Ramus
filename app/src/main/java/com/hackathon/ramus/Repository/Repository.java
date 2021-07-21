@@ -71,6 +71,15 @@ public class Repository {
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).update(map);
     }
 
+    public void initdata(Seat seat) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(FIELD_NAME_SEAT_KEY, seat.getSeatKey());
+        map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME, 0);
+        map.put(FIELD_NAME_SEAT_USER_KEY, "NULL");
+        map.put(FIELD_NAME_SEAT_ROOM_NAME, seat.getRoomName());
+        db.collection(COLLECTION_NAME_OF_SEATS).document(seat.getSeatKey()).set(map, SetOptions.merge());
+    }
+
     public FirebaseUser getUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
