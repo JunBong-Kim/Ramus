@@ -2,6 +2,7 @@ package com.hackathon.ramus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,19 +10,25 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hackathon.ramus.databinding.ActivityStudyRoomBinding;
 
 public class StudyRoomActivity extends AppCompatActivity {
     private ActivityStudyRoomBinding binding;
-    private Button[] seats = new Button[120];
+    private Button[] seats = new Button[100];
     private GridLayout.LayoutParams params;
+    private String roomName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStudyRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        roomName = intent.getStringExtra("roomname");
+        Toast.makeText(this, roomName, Toast.LENGTH_SHORT).show();
         init();
 
        /* binding.seatGridlayout.getLayoutParams().columnSpec =
@@ -34,22 +41,10 @@ public class StudyRoomActivity extends AppCompatActivity {
 
     private void init() {
 
-        for (int i = 0; i < 15; i++) {
-            GridLayout.Spec rowSpec = GridLayout.spec(i, 1, GridLayout.FILL);
-
-            for (int j = 0; j < 4; j++) {
-                GridLayout.Spec colSpec = GridLayout.spec(j, 1, GridLayout.FILL);
-
-                seats[j + j * i] = new Button(this);
-                seats[j + j * i].setText("[ " + i + " | " + j + " ]");
-                seats[j + j * i].setGravity(Gravity.CENTER);
-
-                GridLayout.LayoutParams myGLP = new GridLayout.LayoutParams();
-                myGLP.rowSpec = rowSpec;
-                myGLP.columnSpec = colSpec;
-
-                binding.seatGridlayout.addView(seats[j + j * i], myGLP);
-            }
+        for (int i = 0; i < 100; i++) {
+            seats[i] = new Button(this);
+            seats[i].setText(i+1 + "");
+            binding.seatGridlayout.addView(seats[i]);
         }
         /*params = new GridLayout.LayoutParams(
                 GridLayout.spec(GridLayout.UNDEFINED, 1f),

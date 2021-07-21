@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -207,9 +208,11 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 seatKey = result.getContents();
-                ConfirmSeatDialog dialog = new ConfirmSeatDialog(MainActivity.this);
+                BottomDialogConfirmSeatBinding binding=BottomDialogConfirmSeatBinding.inflate(getLayoutInflater());
+                BottomSheetDialog dialog = new ConfirmSeatDialog(this,binding);
+                dialog.setContentView(binding.getRoot());
                 dialog.show();
-
+                dialog.setCancelable(false);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_secondary"
+    android:orientation="vertical"
     android:paddingTop="36dp"
     >
-
 
 
     <LinearLayout
@@ -22,30 +21,30 @@
 
         <TimePicker
             android:id="@+id/timePicker"
-            android:layout_width="match_parent"
+            style="@style/AppTheme.NumberPicker"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:timePickerMode="spinner"
-            style="@style/AppTheme.NumberPicker"
             />
 
         <TextView
+            android:minLines="2"
             android:id="@+id/textView_time_gap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:lineSpacingExtra="3dp"
+            android:text="시간을 선택해주세요"
             android:textColor="@color/text_primary"
-            android:text="자신의 생일을 선택해주세요"
             android:textFontWeight="700"
             android:textSize="18sp"
             />
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
         >

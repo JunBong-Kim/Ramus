@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public class SearchSeatActivity extends AppCompatActivity {
     private String[] testString = {"제1열람실A", "제1열람실B", "제1열람실노트북석", "CRETECZONE", "S-Lounge", "캐럴", "제2열람실A", "제2열람실B"
             , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
     FirebaseAuth mAuth;
+    private int select;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,6 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewFirst.setText("제1열람실 A (" + emptySeats[0] + "/100)");
                     binding.layoutRoom.textviewSecond.setText("제1열람실 B (" + emptySeats[1] + "/100)");
                     binding.layoutRoom.textviewThird.setText("제1열람실 노트북석 (" + emptySeats[2] + "/100)");
-
                 }
 
             }
@@ -127,9 +129,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("제3열람실 A (" + emptySeats[12] + "/100)");
-                    binding.layoutRoom.textviewSecond.setText("제3열람실 B (" + emptySeats[13] + "/100)");
-                    binding.layoutRoom.textviewThird.setText("제3열람실 C (" + emptySeats[14] + "/100)");
+                    binding.layoutRoom.textviewFirst.setText("제4열람실 A (" + emptySeats[12] + "/100)");
+                    binding.layoutRoom.textviewSecond.setText("제4열람실 B (" + emptySeats[13] + "/100)");
+                    binding.layoutRoom.textviewThird.setText("제4열람실 C (" + emptySeats[14] + "/100)");
                 }
             }
         });
@@ -137,6 +139,34 @@ public class SearchSeatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        binding.layoutRoom.firstRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String roomName = getRoomName(binding.layoutRoom.textviewFirst);
+                Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
+                intent.putExtra("roomname", roomName);
+                startActivity(intent);
+            }
+        });
+        binding.layoutRoom.secondRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String roomName = getRoomName(binding.layoutRoom.textviewSecond);
+                Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
+                intent.putExtra("roomname", roomName);
+                startActivity(intent);
+            }
+        });
+        binding.layoutRoom.thirdRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String roomName = getRoomName(binding.layoutRoom.textviewThird);
+                Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
+                intent.putExtra("roomname", roomName);
+                startActivity(intent);
             }
         });
     }
@@ -160,5 +190,13 @@ public class SearchSeatActivity extends AppCompatActivity {
         constraintLayout2.startAnimation(animation2);
     }
 
+
+    private String getRoomName(TextView textView) {
+        String a = textView.getText().toString();
+        int index = a.indexOf("(");
+        a=a.substring(0, index);
+        a = a.replaceAll(" ", "");
+        return a;
+    }
 }
 
