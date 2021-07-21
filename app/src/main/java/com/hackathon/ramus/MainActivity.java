@@ -42,10 +42,12 @@ import java.lang.reflect.Field;
 
 import java.util.Observable;
 
+import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_SEATS;
 import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_USERS;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_KEY;
 import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_RESERVATION_END_TIME;
+import static com.hackathon.ramus.Constants.FIELD_NAME_SEAT_USER_KEY;
 import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         seatKey = "CRETECZONE10";
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
 
-        db.collection(COLLECTION_NAME_OF_USERS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
@@ -237,15 +239,20 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                         String seatKey = String.valueOf(document.getData().get(FIELD_NAME_SEAT_KEY));
                         long seatReservationEndTime = Long.valueOf(String.valueOf(document.getData().get(FIELD_NAME_SEAT_RESERVATION_END_TIME)));
                         //자리가 있을때는, 상대방의 키 없애고,
-                        if (seatReservationEndTime > System.currentTimeMillis())
-                            viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
-                        //현재 좌석에 나의 키를 배정
+                         String alreadySeatUserKey = document.getData().get(FIELD_NAME_SEAT_USER_KEY).toString();
+                        if (seatReservationEndTime > System.currentTimeMillis() && !alreadySeatUserKey.equals(DATA_USER_SEAT_NULL)) {
+                            viewModel.updateUserNewSeatKey(alreadySeatUserKey, DATA_USER_SEAT_NULL);
+                        }
 
+                        //현재 좌석에 나의 키를 배정
                         viewModel.updateSeatNewUserKeyAndNewEndTime(seatKey, userKey, seatReservationEndTime);
+                        viewModel.updateUserNewSeatKey(userKey,seatKey);
+
                     }else{
                         viewModel.setSeatData(new Seat(seatKey,userKey,seatReservationEndTime));
                         viewModel.updateUserNewSeatKey(userKey,seatKey);
                     }
+
                     String roomNumber = seatKey.replaceAll("\\D+","");
                     Seat seat = new Seat(seatKey,userKey,seatReservationEndTime,roomNumber,System.currentTimeMillis());
                     viewModel.addSeatHistoryToUser(userKey,seat);

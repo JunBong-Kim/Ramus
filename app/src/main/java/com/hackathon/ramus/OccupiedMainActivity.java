@@ -5,13 +5,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.OccupiedMainViewModel;
 import com.hackathon.ramus.databinding.ActivityOccupiedMainBinding;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
@@ -112,10 +117,27 @@ public class OccupiedMainActivity extends AppCompatActivity {
                 }else{
                     binding.layoutMain2Function.textViewUserName.setText(user.getUserName() );
                     userSeat = user.getUserSeat();
-                    binding.layoutMain2Function.textViewSeat.setText(userSeat);
+
+                    ArrayList<Seat> seats = user.getSeatHistoryList();
+                    Seat recentSeat = seats.get(seats.size()-1);
+
+                    binding.layoutMain2Function.textViewTime.setText(HH_mm_format_day(recentSeat.getSeatReservationStartTime())
+                    +" ~ " + HH_mm_format_day(recentSeat.getSeatReservationEndTime()));
+
+                    if(System.currentTimeMillis() > recentSeat.getSeatReservationEndTime()){
+                        binding.layoutMain2Function.textViewSeat.setText("좌석을 반납 해 주세요!");
+                        binding.layoutMain2Function.textViewSeat.setTextColor(Color.RED);
+                    }else{
+                        binding.layoutMain2Function.textViewSeat.setText(userSeat);
+                    }
                 }
             }
         });
+    }
+
+    private String HH_mm_format_day(long time){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(" HH:mm");
+        return dateFormat.format(time);
     }
 
 
