@@ -42,6 +42,10 @@
     <color name="yellow_background">#FFF5DA</color>
     <color name="bluedark_background">#c4d4eb</color>
 
+    <color name="blue_progress">#6C9CF1</color>
+    <color name="red_progress">#ED5B64</color>
+
+
 </resources>
 
 

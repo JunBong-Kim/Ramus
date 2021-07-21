@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.dinuscxj.progressbar.CircleProgressBar
+        android:background="@drawable/oval_white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        android:id="@+id/prgressbar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:progress_text_size="20sp"
+        app:progress_text_color="#00000000"
+        app:style="solid_line"
+        app:progress_stroke_width="12dp "
+        app:progress_start_color="@color/blue_progress"
+        app:progress_end_color="@color/blue_progress"
+        />
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="@id/prgressbar"
+        app:layout_constraintBottom_toBottomOf="@id/prgressbar"
+        app:layout_constraintStart_toStartOf="@id/prgressbar"
+        app:layout_constraintEnd_toEndOf="@id/prgressbar"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/people_remain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:fontFamily="@font/spoqahansans_bold"
+            android:text="11"
+            android:textSize="14dp"
+            >
+        </TextView>
+        <TextView
+            android:layout_marginBottom="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_third"
+            android:fontFamily="@font/spoqahansans_bold"
+            android:text=" / "
+            android:textSize="11dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/people_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_third"
+            android:fontFamily="@font/spoqahansans_bold"
+            android:text="99"
+            android:textSize="14dp"
+            >
+        </TextView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
