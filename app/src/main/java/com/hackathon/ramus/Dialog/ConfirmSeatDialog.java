@@ -16,13 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.hackathon.ramus.R;
 import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ConfirmSeatDialog extends BottomSheetDialog {
+public class ConfirmSeatDialog extends Dialog {
     private Context context;
     private BottomDialogConfirmSeatBinding binding;
     private MyListener myListener;
@@ -30,6 +31,7 @@ public class ConfirmSeatDialog extends BottomSheetDialog {
     private String yyyy_mm_dd_string ;
 
     private String TAG = "dialog";
+
     public ConfirmSeatDialog(@NonNull Context context) {
         super(context);
         this.context = context;
@@ -44,7 +46,6 @@ public class ConfirmSeatDialog extends BottomSheetDialog {
         setContentView(binding.getRoot());
 
         setCancelable(false);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         Log.e(TAG, "onCreate: yyyy_mm_dd_string" + yyyy_mm_dd_string );

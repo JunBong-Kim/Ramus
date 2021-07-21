@@ -112,7 +112,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
                 }else{
                     binding.layoutMain2Function.textViewUserName.setText(user.getUserName() );
                     userSeat = user.getUserSeat();
-                    binding.layoutMain2Function.textViewSeatName.setText(userSeat);
+                    binding.layoutMain2Function.textViewSeat.setText(userSeat);
                 }
             }
         });

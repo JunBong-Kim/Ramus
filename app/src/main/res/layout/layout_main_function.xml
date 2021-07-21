@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="2016113597"
                 android:fontFamily="@font/spoqahansans_regular"
-                android:textColor="@color/text_third"
+                android:textColor="@color/text_second"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

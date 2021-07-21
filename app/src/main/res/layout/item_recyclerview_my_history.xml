@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="22dp"
+    android:layout_marginVertical="22dp"
+    android:layout_gravity="center_vertical"
+    >
+
+
+    <LinearLayout
+        android:background="@drawable/recdia"
+        android:layout_marginLeft="6dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="22dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_marginTop="2dp"
+                android:id="@+id/location"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/study_location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+
+
+            <TextView
+                android:layout_marginLeft="14dp"
+                android:id="@+id/textView_gov_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/spoqahansans_regular"
+                android:text="제1열람실 A - 32번"
+                android:paddingRight="14dp"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/location"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_marginTop="2dp"
+                android:id="@+id/time"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="2dp"
+                android:src="@drawable/time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+
+
+            <TextView
+                android:id="@+id/textview_day"
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/spoqahansans_regular"
+                android:text="2021년 7월 21일"
+                android:paddingRight="14dp"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time"
+              />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/textview_day"
+                app:layout_constraintStart_toStartOf="@id/textview_day"
+                android:id="@+id/textView_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="11sp"
+                android:fontFamily="@font/spoqahansans_regular"
+                android:text="11 : 00 ~ 17 : 30"
+                android:textColor="@color/text_second" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+        <TextView
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textView_area_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqahansans_regular"
+            android:textColor="@color/text_second"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

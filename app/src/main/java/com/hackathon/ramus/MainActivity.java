@@ -6,15 +6,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -27,6 +35,9 @@ import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.MainViewModel;
 import com.hackathon.ramus.databinding.ActivityMainBinding;
+import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
+
+import java.lang.reflect.Field;
 
 import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_USERS;
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
@@ -186,11 +197,14 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 seatKey = result.getContents();
                 ConfirmSeatDialog dialog = new ConfirmSeatDialog(MainActivity.this);
                 dialog.show();
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
 
     @Override
     public void notifyPositiveButtonClick(long seatReservationEndTime) {
