@@ -63,7 +63,7 @@
 
             <TextView
                 android:layout_marginTop="4dp"
-                android:id="@+id/textView_student_id"
+                android:id="@+id/textView_seat_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2층 제2열람실 32번 자리"
@@ -75,6 +75,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layout_finish"
             app:layout_constraintTop_toTopOf="@id/layout_name"
             app:layout_constraintBottom_toBottomOf="@id/layout_name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +120,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/layout_qr"
+            android:id="@+id/layout_report"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +131,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_search"
+            android:id="@+id/layout_break"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/center_view"

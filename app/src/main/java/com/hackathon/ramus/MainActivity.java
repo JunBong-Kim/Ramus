@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
     private void setListeners(){
-        binding.buttonQrOpen.setOnClickListener(new View.OnClickListener() {
+        binding.layoutMainFunction.layoutQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
-        binding.buttonWebViewDaeGuInfo.setOnClickListener(new View.OnClickListener() {
+        binding.layoutCoronaWeb.daeguWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
-        binding.buttonWebViewKnuInfo.setOnClickListener(new View.OnClickListener() {
+        binding.layoutCoronaWeb.knuWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),WebViewActivity.class);
@@ -95,10 +95,17 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             }
         });
 
-        binding.buttonDaeguCovidNews.setOnClickListener(new View.OnClickListener() {
+        binding.layoutCoronaWeb.daegu4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DaeguCovidConfirmationActivity.class));
+            }
+        });
+
+        binding.layoutMainFunction.layoutSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),SearchSeatActivity.class));
             }
         });
     }
@@ -123,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                 if(!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
+                }else{
+                    binding.layoutMainFunction.textViewUserName.setText(user.getUserName());
+                    binding.layoutMainFunction.textViewStudentId.setText(user.getUserStudentNumber());
                 }
             }
         });

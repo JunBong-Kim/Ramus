@@ -27,14 +27,14 @@
             tools:replace="screenOrientation" />
         <activity android:name=".EmailSignUpActivity" />
         <activity android:name=".EmailAuthLoginActivity">
-
-        </activity>
-        <activity android:name=".MaintestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MaintestActivity">
+
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
