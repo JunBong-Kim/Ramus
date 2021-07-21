@@ -36,6 +36,7 @@ public class Constants {
 
     public static final int SEAT_TYPE_NO = 0;
     public static final int SEAT_TYPE_YES= 1;
+    public static final int SEAT_TYPE_PILLAR = 2;
     /*
 
 

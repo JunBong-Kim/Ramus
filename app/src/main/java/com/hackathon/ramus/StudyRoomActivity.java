@@ -19,18 +19,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hackathon.ramus.Adapters.StudyRoomAdapter;
+import com.hackathon.ramus.Dialog.ConfirmSeatDialog;
+import com.hackathon.ramus.Dialog.MyListener;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.SeatItem;
 import com.hackathon.ramus.Viewmodel.StudyRoomViewModel;
 import com.hackathon.ramus.databinding.ActivityStudyRoomBinding;
+import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_NO;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_YES;
 
-public class StudyRoomActivity extends AppCompatActivity {
+public class StudyRoomActivity extends AppCompatActivity implements MyListener {
     private String TAG = "StudyRoomActivity";
 
     private ActivityStudyRoomBinding binding;
@@ -45,57 +52,64 @@ public class StudyRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         init();
+        setDummyData();
 
         Intent intent = getIntent();
         roomName = intent.getStringExtra("roomname");
 
-        Toast.makeText(this, "" + roomName, Toast.LENGTH_SHORT).show();
         //observe();
-
-        // data to populate the RecyclerView with
-        String[] data = new String[100];
-        for(int i=0;i<100;i++){
-            data[i] = String.valueOf(i);
-        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        int numberOfColumns = 5;
+        int numberOfColumns = 7;
+        //2랑 5 빈
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         adapter = new StudyRoomAdapter(this, seatItems);
         adapter.setClickListener(new StudyRoomAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(StudyRoomActivity.this, "" + adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, SeatItem seatItem) {
+               Toast.makeText(StudyRoomActivity.this, " " + seatItem.getRoomName() , Toast.LENGTH_SHORT).show();
+                if(seatItem.getSeatReservationEndTime() > System.currentTimeMillis()) {
+                    if (seatItem.getSeatUserKey() != null) {
+                        showBottomSheetDialog();
+                    }
+                }
+
             }
         });
         recyclerView.setAdapter(adapter);
 
     }
 
+
+
+    private void showBottomSheetDialog(){
+        BottomDialogConfirmSeatBinding binding = BottomDialogConfirmSeatBinding.inflate(getLayoutInflater());
+        BottomSheetDialog dialog = new ConfirmSeatDialog(StudyRoomActivity.this, binding);
+        dialog.setContentView(binding.getRoot());
+        dialog.show();
+        dialog.setCancelable(false);
+    }
+
     private void setDummyData(){
 
-        /*
-         private String seatKey;
-    private String seatUserKey;
-    private long seatReservationEndTime;
-    private String roomName;
-    private long seatReservationStartTime;
-    private int viewType;
-
-
-         */
         for(int i=0;i<100;i++){
             String number;
             if(i<10) number = "0"+i;
             else number = String.valueOf(i);
 
-            seatItems.add(new SeatItem("제1열람실A"+number,DATA_USER_SEAT_NULL,
-                    System.currentTimeMillis(),
+            Log.e(TAG, "setDummyData: " + number );
+            int type = SEAT_TYPE_YES;
+            if(i%7 == 2 || i%7 == 5)type = SEAT_TYPE_NO;
+            if(i%21 == 10 || i%21 ==11 || i%21 ==  17 || i%21 == 18)type = SEAT_TYPE_PILLAR;
+            seatItems.add(new SeatItem("제1열람실A"+number,
+                    DATA_USER_SEAT_NULL,
+                    System.currentTimeMillis()+10000000,
                     "제1열람실A",
                     System.currentTimeMillis(),
-                    i));
+                    type));
         }
+
     }
 
     private void init(){
@@ -116,5 +130,8 @@ public class StudyRoomActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void notifyPositiveButtonClick(long seatReservationEndTime) {
 
+    }
 }
