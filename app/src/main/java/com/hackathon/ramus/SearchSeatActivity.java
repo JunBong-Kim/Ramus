@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hackathon.ramus.Adapters.ViewPagerSliderAdapter;
 import com.hackathon.ramus.Model.Seat;
+import com.hackathon.ramus.Model.SeatItem;
 import com.hackathon.ramus.Repository.Repository;
 import com.hackathon.ramus.Viewmodel.EmailSignUpViewModel;
 import com.hackathon.ramus.Viewmodel.SeatViewModel;
@@ -47,6 +48,7 @@ import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_DOWN;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_UP;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_DOWN;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_UP;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_YES_SPACE;
 
 public class SearchSeatActivity extends AppCompatActivity {
     private ActivitySearchSeatBinding binding;
@@ -60,7 +62,7 @@ public class SearchSeatActivity extends AppCompatActivity {
             , "제 2열람실 C", "제 3열람실 A", "제 3열람실 B", "제 3열람실 C", "제 4열람실 A", "제 4열람실 B", "제 4열람실 C"};
     private TextView[] floorTexts = new TextView[5];
     private String[] floorStrings = {"B1", "1층", "2층", "3층", "4층"};
-    private List<Integer> seatPossible= new ArrayList<>();
+    private List<Integer> seatPossible = new ArrayList<>();
     FirebaseAuth mAuth;
     private int select;
 
@@ -70,8 +72,8 @@ public class SearchSeatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int abc=1;
-        for(int i=0;i<171;i++){
+        int abc = 1;
+        for (int i = 0; i < 171; i++) {
             if (i % 9 == 2 || i % 9 == 5) continue;
             if (i / 9 == 4) continue;
             if (i / 9 == 9) continue;
@@ -81,7 +83,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             if (i == 57 || i == 120) continue;
             if (i == 58 || i == 121) continue;
             if (i % 9 == 8) continue;
-            seatPossible.add(abc);
+            if (i % 2 == 0) {
+                seatPossible.add(abc);
+            }
             abc++;
         }
         getLiveData();
@@ -120,7 +124,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     int cnt = 0;
                     long time = System.currentTimeMillis();
                     for (int j = 0; j < seats.size(); j++) {
-                        if (seats.get(j).getSeatReservationEndTime() < time && seatPossible.contains(j+1)) {
+                        if (seats.get(j).getSeatReservationEndTime() < time && seatPossible.contains(j + 1)) {
                             cnt++;
                         }
                     }
