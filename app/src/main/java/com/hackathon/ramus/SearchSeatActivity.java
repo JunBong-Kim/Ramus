@@ -259,6 +259,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
+                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
             }
         });
         binding.layoutRoom.secondRoom.setOnClickListener(new View.OnClickListener() {
@@ -268,6 +269,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
+                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
             }
         });
         binding.layoutRoom.thirdRoom.setOnClickListener(new View.OnClickListener() {
@@ -277,6 +279,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
+                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
             }
         });
     }

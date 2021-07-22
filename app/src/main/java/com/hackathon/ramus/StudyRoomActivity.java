@@ -7,12 +7,17 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -28,6 +33,7 @@ import com.hackathon.ramus.Model.SeatItem;
 import com.hackathon.ramus.Viewmodel.StudyRoomViewModel;
 import com.hackathon.ramus.databinding.ActivityStudyRoomBinding;
 import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
+import com.hackathon.ramus.databinding.DialogBedStudentBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +83,35 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
                Toast.makeText(StudyRoomActivity.this, " " + seatItem.getRoomName() , Toast.LENGTH_SHORT).show();
                 if(seatItem.getSeatReservationEndTime() > System.currentTimeMillis()) {
                     if (seatItem.getSeatUserKey() != null) {
-                        showBottomSheetDialog();
+                        //showBottomSheetDialog();
+
+                        DialogBedStudentBinding binding =DialogBedStudentBinding.inflate(getLayoutInflater());
+                        Dialog dialog = new Dialog(StudyRoomActivity.this);
+                        dialog.setContentView(binding.getRoot());
+                        //dialog.setCancelable(false);
+                        binding.layoutMask.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        binding.layoutNoize.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        binding.layoutNoSeat.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+
                     }
                 }
 
@@ -179,6 +213,13 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
         viewModel = new ViewModelProvider(this).get(StudyRoomViewModel.class);
         viewModel.init(StudyRoomActivity.this);
 
+        binding.backpress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void observe(){
@@ -193,5 +234,12 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
     @Override
     public void notifyPositiveButtonClick(long seatReservationEndTime) {
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.ani_left_back,R.anim.ani_right_back);
     }
 }
