@@ -8,6 +8,7 @@
     android:layout_marginHorizontal="22dp"
     android:layout_marginBottom="20dp"
     android:layout_gravity="center_vertical"
+    android:layout_margin="20dp"
     >
         <ImageView
             android:layout_marginTop="2dp"
@@ -29,17 +30,17 @@
         android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/textView_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqahansans_medium"
-                android:text="2021년 07월 22일 확진자 발생"
-                android:textColor="@color/primary"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqahansans_medium"
+            android:text="2021년 07월 22일 확진자 발생"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_content"

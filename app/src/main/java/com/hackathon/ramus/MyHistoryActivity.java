@@ -14,6 +14,8 @@ import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.MyHistoryViewModel;
 import com.hackathon.ramus.databinding.ActivityMyHistoryBinding;
 
+import java.util.Collections;
+
 import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 
 public class MyHistoryActivity extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class MyHistoryActivity extends AppCompatActivity {
             @Override
             public void onChanged(User user) {
                 Log.e(TAG, "onChanged: "  + user.getSeatHistoryList().size() );
+                Collections.reverse(user.getSeatHistoryList());
                 adapter.setHistories(user.getSeatHistoryList());
             }
         });

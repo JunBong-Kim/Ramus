@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.hackathon.ramus.Adapters.SpecificConfirmationAdapter;
@@ -17,6 +18,8 @@ import com.hackathon.ramus.databinding.ActivitySpecificConfirmationHistoryBindin
 import static com.hackathon.ramus.Constants.INTENT_DATA_KEY;
 
 public class SpecificConfirmationHistoryActivity extends AppCompatActivity {
+
+    private String TAG = "SpecificConfirmationHistoryActivity";
     private ActivitySpecificConfirmationHistoryBinding binding;
     private SpecificConfirmationHistoryViewModel viewModel;
     private SpecificConfirmationAdapter adapter;
@@ -30,6 +33,7 @@ public class SpecificConfirmationHistoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         key = intent.getExtras().get(INTENT_DATA_KEY).toString();
 
+        Log.e(TAG, "onCreate: " + key);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter= new SpecificConfirmationAdapter(this);
         binding.recyclerView.setAdapter(adapter);
@@ -38,7 +42,8 @@ public class SpecificConfirmationHistoryActivity extends AppCompatActivity {
          viewModel.getSpecificConfirmationHistory(key).observe(this, new Observer<ConfirmationHistory>() {
              @Override
              public void onChanged(ConfirmationHistory confirmationHistory) {
-                 adapter.setList(confirmationHistory.getSeatHistoryList());
+                 Log.e(TAG, "@@@@@@@@@@@: "+confirmationHistory.getSeatHistoryList().size() );
+                 adapter.setList(confirmationHistory.getSeatHistoryList(),confirmationHistory.getConfirmationDay());
              }
          });
 

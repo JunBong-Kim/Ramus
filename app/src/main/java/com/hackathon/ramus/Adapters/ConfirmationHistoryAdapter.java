@@ -1,10 +1,12 @@
 package com.hackathon.ramus.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    private String TAG = "ConfirmationHistoryAdapter";
 
     private ItemClickListener mListener;
 
@@ -41,13 +43,21 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_confimation_history,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyclerview_confirmed,parent,false);
         return new HistoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HistoryViewHolder)holder).textView_confirmation_day.setText(longToYY_MM(arrayList.get(position).getConfirmationDay()));
+        ((HistoryViewHolder)holder).textView_day.setText("확진일:"+longToYY_MM(arrayList.get(position).getConfirmationDay()));
+
+        Log.e(TAG, "onBindViewHolder: " + position);
+
+        if(arrayList.get(position).getSeatHistoryList().size() == 0){
+            ((HistoryViewHolder)holder).textView_content.setText((position+1) + "번 확진자\n최근 14일내 도서관 이용기록 없음\n이전 기록은 관리자 문의 바랍니다.");
+        }else
+        ((HistoryViewHolder)holder).textView_content.setText((position +1)+"번 확진자\n" +
+                "최근 도서관 " + arrayList.get(position).getSeatHistoryList().size() + "번 활용");
     }
 
 
@@ -57,16 +67,19 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private class HistoryViewHolder extends RecyclerView.ViewHolder{
-        private TextView textView_confirmation_day;
-
+        private TextView textView_day,textView_content;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView_confirmation_day = itemView.findViewById(R.id.textView_confirmation_day);
-
+            textView_day = itemView.findViewById(R.id.textView_day);
+            textView_content = itemView.findViewById(R.id.textView_content);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(getAdapterPosition() != RecyclerView.NO_POSITION){
+                        if(arrayList.get(getAdapterPosition()).getSeatHistoryList().size() == 0){
+                            Toast.makeText(mContext, "최근 14일 간 도서관 이용내역이 없습니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         mListener.onItemClick(arrayList.get(getAdapterPosition()).getConfirmationHistoryKey());
                     }
                 }
@@ -81,17 +94,9 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private String longToYY_MM(long in){
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(in);
         return sdf.format(date);
     }
 
-    /*
-
-       private String confirmationHistoryKey;
-    private String userKey;
-    private ArrayList<Seat> seatHistoryList;
-    private long confirmationDay;
-
-     */
 }
