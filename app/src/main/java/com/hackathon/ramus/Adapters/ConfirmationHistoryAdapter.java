@@ -49,7 +49,7 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HistoryViewHolder)holder).textView_day.setText(longToYY_MM(arrayList.get(position).getConfirmationDay())+"\n"+(position +1)+"번 확진자 발생");
+        ((HistoryViewHolder)holder).textView_day.setText(longToYY_MM(arrayList.get(position).getConfirmationDay())+"\n"+(arrayList.size()-position)+"번 확진자 발생");
 
 
         Log.e(TAG, "onBindViewHolder: " + position);

@@ -15,6 +15,8 @@ import com.hackathon.ramus.Viewmodel.ConfirmationHistoryViewModel;
 import com.hackathon.ramus.databinding.ActivityConfirmationHistoryBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.hackathon.ramus.Constants.INTENT_DATA_KEY;
 
@@ -67,6 +69,14 @@ public class ConfirmationHistoryActivity extends AppCompatActivity {
         viewModel.getConfirmationSeatsArrayList().observe(this, new Observer<ArrayList<ConfirmationHistory>>() {
             @Override
             public void onChanged(ArrayList<ConfirmationHistory> seatArrayList) {
+                Collections.sort(seatArrayList, new Comparator<ConfirmationHistory>() {
+                    @Override
+                    public int compare(ConfirmationHistory o1, ConfirmationHistory o2) {
+                        if(o1.getConfirmationDay() < o2.getConfirmationDay())return 1;
+                        return -1;
+
+                    }
+                });
                 adapter.setArrayList(seatArrayList);
             }
         });

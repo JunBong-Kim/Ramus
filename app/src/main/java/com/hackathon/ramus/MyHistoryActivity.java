@@ -10,11 +10,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hackathon.ramus.Adapters.MySeatHistoryAdapter;
+import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.MyHistoryViewModel;
 import com.hackathon.ramus.databinding.ActivityMyHistoryBinding;
 
 import java.util.Collections;
+import java.util.Comparator;
 
 import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 
@@ -37,7 +39,13 @@ public class MyHistoryActivity extends AppCompatActivity {
             @Override
             public void onChanged(User user) {
                 Log.e(TAG, "onChanged: "  + user.getSeatHistoryList().size() );
-                Collections.reverse(user.getSeatHistoryList());
+                Collections.sort(user.getSeatHistoryList(), new Comparator<Seat>() {
+                    @Override
+                    public int compare(Seat o1, Seat o2) {
+                        if(o1.getSeatReservationEndTime()<o2.getSeatReservationEndTime())return 1;
+                        return -1;
+                    }
+                });
                 adapter.setHistories(user.getSeatHistoryList());
             }
         });
