@@ -74,6 +74,7 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
     private StudyRoomAdapter adapter;
     private StudyRoomViewModel viewModel;
     private String roomName;
+    private String myUserKey = "";
 
     private ArrayList<SeatItem> seatItems = new ArrayList<>();
 
@@ -86,6 +87,7 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
 
         Intent intent = getIntent();
         roomName = intent.getStringExtra("roomname");
+        myUserKey = intent.getStringExtra("seatuserkey");
         binding.roomName.setText(roomName);
 
         Toast.makeText(this, "" + roomName, Toast.LENGTH_SHORT).show();
@@ -167,11 +169,6 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
     }
 
     private void observe() {
-        if (roomName.equals("CRETEC Zone")) {
-            roomName = roomName.toUpperCase();
-        }
-
-
         viewModel.getSpecificRoomListData(roomName.replaceAll(" ", ""), "roomName").observe(this, new Observer<List<Seat>>() {
             @Override
             public void onChanged(List<Seat> seats) {
@@ -191,8 +188,10 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
 
     @Override
     public void onItemClick(View view, Seat seat) {
-        if (seat.getSeatReservationEndTime() > System.currentTimeMillis()) {
-            showBottomSheetDialog(seat.getSeatUserKey());
+        if (myUserKey != null) {
+            if (!seat.getSeatUserKey().equals(myUserKey) && seat.getSeatReservationEndTime() > System.currentTimeMillis()) {
+                showBottomSheetDialog(seat.getSeatUserKey());
+            }
         }
     }
 

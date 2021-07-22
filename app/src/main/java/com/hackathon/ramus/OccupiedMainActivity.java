@@ -36,6 +36,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
     private ActivityOccupiedMainBinding binding;
     private OccupiedMainViewModel viewModel;
     private String userKey, userSeat;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,10 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutMain2Function.layoutReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OccupiedMainActivity.this, FindBadStudentActivity.class));
+                Intent intent = new Intent(OccupiedMainActivity.this, StudyRoomActivity.class);
+                intent.putExtra("roomname", mUser.getUserSeat().substring(0, mUser.getUserSeat().length() - 2));
+                intent.putExtra("seatuserkey", mUser.getUserKey());
+                startActivity(intent);
             }
         });
 
@@ -117,7 +121,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW)
                         .setData(Uri.parse("https://www.youtube.com/channel/UCRk-80t6-G4_RE2hzDdUPTA")) // edit this url
-                        .setPackage("com.google.android.youtube"));	// do not edit
+                        .setPackage("com.google.android.youtube"));    // do not edit
             }
         });
         binding.instagram.setOnClickListener(new View.OnClickListener() {
@@ -140,9 +144,8 @@ public class OccupiedMainActivity extends AppCompatActivity {
 
     }
 
-    private void setDialogFinish()
-    {
-        DialogFinishStudyBinding binding =DialogFinishStudyBinding.inflate(getLayoutInflater());
+    private void setDialogFinish() {
+        DialogFinishStudyBinding binding = DialogFinishStudyBinding.inflate(getLayoutInflater());
         Dialog dialog = new Dialog(OccupiedMainActivity.this);
         dialog.setContentView(binding.getRoot());
         dialog.show();
@@ -172,6 +175,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
         viewModel.getSpecificUserLiveData(userKey).observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
+                mUser = user;
                 if (user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
