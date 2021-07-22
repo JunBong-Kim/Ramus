@@ -42,6 +42,7 @@ A rolling stone does not rust
     
     사용자에게 더 직관적으로 좌석 배치에 대한 인식을 경험하게끔 유도했습니다.
 
+<img src="https://github.com/JunBong-Kim/Ramus/issues/2#issue-950823994" width="40%" height="30%" title="px(픽셀) 크기 설정" alt=“seat_deatil”></img>
 
 
 3 이용중 마스크써주세요, 정숙해주세요 , 자리를 너무비운다 쪽지기능
