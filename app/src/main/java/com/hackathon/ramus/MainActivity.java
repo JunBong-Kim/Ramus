@@ -310,6 +310,18 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                  if (!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
                     if (flag) return;
                     flag = true;
+                     DialogPosterBinding binding =DialogPosterBinding.inflate(getLayoutInflater());
+                     Dialog dialog = new Dialog(MainActivity.this);
+                     dialog.setContentView(binding.getRoot());
+                     //dialog.setCancelable(false);
+                     dialog.show();
+                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                     binding.close.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View v) {
+                             dialog.dismiss();
+                         }
+                     });
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
                 } else {

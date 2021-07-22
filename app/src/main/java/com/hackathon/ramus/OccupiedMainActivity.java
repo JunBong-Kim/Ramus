@@ -162,7 +162,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //seatReservationTime 에 있는 시간을 현재 시간으로 바꾸고,
                 //seatUserKey 도 NULL 로 바꾸고
-                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat, DATA_USER_SEAT_NULL, System.currentTimeMillis());
+                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat, DATA_USER_SEAT_NULL, Long.valueOf(0));
                 //userSeat 도 NULL 로 바꾼다
                 viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
             }

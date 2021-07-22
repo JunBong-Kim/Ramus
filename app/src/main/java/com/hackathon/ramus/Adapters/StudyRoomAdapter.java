@@ -138,8 +138,7 @@ public class StudyRoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             String seatCnt = seatItems.get(position).getCnt();
             myTextView.setText(seatCnt);
             if (seats.size() != 0) {
-                if (seats.get(Integer.parseInt(seatCnt) - 1).getSeatReservationEndTime() > System.currentTimeMillis()||
-                        seats.get(Integer.parseInt(seatCnt) - 1).getSeatUserKey().equals("NULL")) {
+                if (seats.get(Integer.parseInt(seatCnt) - 1).getSeatReservationEndTime() > System.currentTimeMillis()) {
                     //자리 불가
                     myTextView.setBackground(context.getDrawable(R.drawable.rec_seat_darkgray));
                 } else {
