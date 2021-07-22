@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="22dp"
+    android:layout_marginBottom="20dp"
+    android:layout_gravity="center_vertical"
+    >
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:id="@+id/danger"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:src="@drawable/corona_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <LinearLayout
+        android:layout_marginLeft="12dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/rec_full"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/spoqahansans_medium"
+                android:text="2021년 07월 22일 확진자 발생"
+                android:textColor="@color/primary"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/spoqahansans_regular"
+            android:text="3번 확진자\n최근 2주간 도서관 8회 이용"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_primary" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
