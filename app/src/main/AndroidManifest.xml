@@ -22,7 +22,6 @@
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".EmailCheckActivity" />
         <activity android:name=".CreateQrActivity" />
-        <activity android:name=".ScanQrActivity" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
@@ -35,7 +34,6 @@
 
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MainActivity2" />
         <activity android:name=".SearchSeatActivity">
         </activity>
         <activity android:name=".SplashActivity">
@@ -59,7 +57,6 @@
         </service>
 
         <activity android:name=".MyHistoryActivity"/>
-        <activity android:name=".FindBadStudentActivity"/>
 
     </application>
 
