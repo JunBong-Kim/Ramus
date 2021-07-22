@@ -50,6 +50,8 @@ public class SearchSeatActivity extends AppCompatActivity {
             , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
     private String[] roomNames = {"제 1열람실 A", "제 1열람실 B", "제 1열람실 노트북석", "CRETEC ZONE", "S-Lounge", "캐럴", "제 2열람실 A", "제 2열람실 B"
             , "제 2열람실 C", "제 3열람실 A", "제 3열람실 B", "제 3열람실 C", "제 4열람실 A", "제 4열람실 B", "제 4열람실 C"};
+    private TextView[] floorTexts = new TextView[5];
+    private String[] floorStrings = {"B1", "1층", "2층", "3층", "4층"};
     FirebaseAuth mAuth;
     private int select;
 
@@ -95,20 +97,20 @@ public class SearchSeatActivity extends AppCompatActivity {
                     int cnt = 0;
                     long time = System.currentTimeMillis();
                     for (int j = 0; j < seats.size(); j++) {
-                        if (seats.get(j).getSeatReservationEndTime() < time) {
+                        if (seats.get(j).getSeatReservationEndTime() < time && j % 2 == 1) {
                             cnt++;
                         }
                     }
                     emptySeats[finalI] = cnt;
                     if (finalI / 3 == select) {
                         if (finalI % 3 == 0) {
-                            binding.layoutRoom.first.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.first.prgressbar.setProgress((int) (((double) cnt / 44.0) * 100));
                             binding.layoutRoom.first.peopleRemain.setText("" + cnt);
                         } else if (finalI % 3 == 1) {
-                            binding.layoutRoom.second.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.second.prgressbar.setProgress((int) (((double) cnt / 44.0) * 100));
                             binding.layoutRoom.second.peopleRemain.setText("" + cnt);
                         } else {
-                            binding.layoutRoom.third.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.third.prgressbar.setProgress((int) (((double) cnt / 44.0) * 100));
                             binding.layoutRoom.third.peopleRemain.setText("" + cnt);
                         }
                     }
@@ -122,9 +124,25 @@ public class SearchSeatActivity extends AppCompatActivity {
     private void init() {
 
         binding = ActivitySearchSeatBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
-
+        floorTexts[0] = binding.layoutFloor.textviewB1;
+        floorTexts[1] = binding.layoutFloor.textviewFirst;
+        floorTexts[2] = binding.layoutFloor.textviewSecond;
+        floorTexts[3] = binding.layoutFloor.textviewThird;
+        floorTexts[4] = binding.layoutFloor.textviewFourth;
+        for (int i = 0; i < 5; i++) {
+            int floorTotal = 0;
+            for (int j = 0; j < 3; j++) {
+                floorTotal += emptySeats[i * 3 + j];
+            }
+            if (floorTotal / (132.0) * 100 > 50) {
+                floorTexts[i].setBackground(getApplicationContext().getDrawable(R.drawable.rec_full));
+                floorTexts[i].setText(floorStrings[i] + " 혼잡");
+            } else {
+                floorTexts[i].setBackground(getApplicationContext().getDrawable(R.drawable.rec));
+                floorTexts[i].setText(floorStrings[i] + " 자리 많음");
+            }
+        }
 
         constraintLayout1 = findViewById(R.id.layout_floor);
         constraintLayout2 = findViewById(R.id.layout_room);
@@ -147,11 +165,11 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewThird.setText("제1열람실 노트북석");
 
                     binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[0]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[0] / 88.0) * 100));
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[0] / 44.0) * 100));
                     binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[1]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[1] / 88.0) * 100));
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[1] / 44.0) * 100));
                     binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[2]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[2] / 88.0) * 100));
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[2] / 44.0) * 100));
 
                    /* //만석이면
                     binding.layoutRoom.first.prgressbar.setProgressStartColor(getColor(R.color.red_progress));
@@ -178,11 +196,11 @@ public class SearchSeatActivity extends AppCompatActivity {
 
 
                     binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[3]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[3] / 88.0) * 100));
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[3] / 44.0) * 100));
                     binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[4]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[4] / 88.0) * 100));
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[4] / 44.0) * 100));
                     binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[5]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[5] / 88.0) * 100));
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[5] / 44.0) * 100));
                 }
             }
         });
@@ -197,11 +215,11 @@ public class SearchSeatActivity extends AppCompatActivity {
                     select = 2;
 
                     binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[6]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[6] / 88.0) * 100));
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[6] / 44.0) * 100));
                     binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[7]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[7] / 88.0) * 100));
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[7] / 44.0) * 100));
                     binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[8]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[8] / 88.0) * 100));
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[8] / 44.0) * 100));
                 }
             }
         });
@@ -216,11 +234,11 @@ public class SearchSeatActivity extends AppCompatActivity {
                     select = 3;
 
                     binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[9]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[9] / 88.0) * 100));
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[9] / 44.0) * 100));
                     binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[10]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[10] / 88.0) * 100));
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[10] / 44.0) * 100));
                     binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[11]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[11] / 88.0) * 100));
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[11] / 44.0) * 100));
                 }
             }
         });
@@ -235,11 +253,11 @@ public class SearchSeatActivity extends AppCompatActivity {
                     select = 4;
 
                     binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[12]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[12] / 88.0) * 100));
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[12] / 44.0) * 100));
                     binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[13]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[13] / 88.0) * 100));
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[13] / 44.0) * 100));
                     binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[14]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[14] / 88.0) * 100));
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[14] / 44.0) * 100));
                 }
 
             }

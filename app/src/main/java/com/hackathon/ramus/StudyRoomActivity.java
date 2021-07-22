@@ -89,8 +89,6 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
         roomName = intent.getStringExtra("roomname");
         myUserKey = intent.getStringExtra("seatuserkey");
         binding.roomName.setText(roomName);
-
-        Toast.makeText(this, "" + roomName, Toast.LENGTH_SHORT).show();
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 9;

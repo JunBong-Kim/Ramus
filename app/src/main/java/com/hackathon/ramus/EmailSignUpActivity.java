@@ -81,7 +81,6 @@ public class EmailSignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(EmailSignUpActivity.this, "" + authResult.getUser().getEmail(), Toast.LENGTH_SHORT).show();
                         authResult.getUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
