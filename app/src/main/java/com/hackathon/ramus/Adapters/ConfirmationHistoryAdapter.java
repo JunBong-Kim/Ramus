@@ -49,15 +49,16 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HistoryViewHolder)holder).textView_day.setText("확진일:"+longToYY_MM(arrayList.get(position).getConfirmationDay()));
+        ((HistoryViewHolder)holder).textView_day.setText(longToYY_MM(arrayList.get(position).getConfirmationDay())+"\n"+(position +1)+"번 확진자 발생");
+
 
         Log.e(TAG, "onBindViewHolder: " + position);
 
         if(arrayList.get(position).getSeatHistoryList().size() == 0){
-            ((HistoryViewHolder)holder).textView_content.setText((position+1) + "번 확진자\n최근 14일내 도서관 이용기록 없음\n이전 기록은 관리자 문의 바랍니다.");
+            ((HistoryViewHolder)holder).textView_content.setText("최근 14일내 이용기록 없음\n이전 기록은 관리자 문의 바랍니다.");
         }else
-        ((HistoryViewHolder)holder).textView_content.setText((position +1)+"번 확진자\n" +
-                "최근 도서관 " + arrayList.get(position).getSeatHistoryList().size() + "번 활용");
+        ((HistoryViewHolder)holder).textView_content.setText(
+                "최근 14일내 열람실 " + arrayList.get(position).getSeatHistoryList().size() + "회 이용");
     }
 
 
@@ -94,7 +95,7 @@ public class ConfirmationHistoryAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private String longToYY_MM(long in){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
         Date date = new Date(in);
         return sdf.format(date);
     }

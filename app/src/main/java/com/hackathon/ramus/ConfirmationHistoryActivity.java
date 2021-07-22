@@ -38,6 +38,14 @@ public class ConfirmationHistoryActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ConfirmationHistoryViewModel.class);
         viewModel.init(ConfirmationHistoryActivity.this);
 
+        binding.toolbar.setTitle("도서관 확진자 현황");
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ConfirmationHistoryAdapter(this);

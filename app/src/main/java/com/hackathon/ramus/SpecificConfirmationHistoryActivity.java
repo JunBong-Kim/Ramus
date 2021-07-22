@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.hackathon.ramus.Adapters.MySeatHistoryAdapter;
 import com.hackathon.ramus.Adapters.SpecificConfirmationAdapter;
 import com.hackathon.ramus.Model.ConfirmationHistory;
 import com.hackathon.ramus.Viewmodel.SpecificConfirmationHistoryViewModel;
@@ -34,9 +35,7 @@ public class SpecificConfirmationHistoryActivity extends AppCompatActivity {
         key = intent.getExtras().get(INTENT_DATA_KEY).toString();
 
         Log.e(TAG, "onCreate: " + key);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter= new SpecificConfirmationAdapter(this);
-        binding.recyclerView.setAdapter(adapter);
+
 
 
          viewModel.getSpecificConfirmationHistory(key).observe(this, new Observer<ConfirmationHistory>() {
@@ -57,6 +56,19 @@ public class SpecificConfirmationHistoryActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(SpecificConfirmationHistoryViewModel.class);
         viewModel.init(this);
+
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter= new SpecificConfirmationAdapter(this);
+        binding.recyclerView.setAdapter(adapter);
+
+        binding.toolbar.setTitle("이용내역");
+        setSupportActionBar(binding.toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 
 
