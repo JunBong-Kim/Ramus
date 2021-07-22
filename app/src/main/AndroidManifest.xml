@@ -21,7 +21,11 @@
         <activity android:name=".OccupiedMainActivity" />
         <activity android:name=".UserRegisterActivity" />
         <activity android:name=".EmailCheckActivity" />
-        <activity android:name=".CreateQrActivity" />
+        <activity android:name=".CreateQrActivity" >
+
+
+
+        </activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
@@ -42,7 +46,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".StudyRoomActivity"/>
 
