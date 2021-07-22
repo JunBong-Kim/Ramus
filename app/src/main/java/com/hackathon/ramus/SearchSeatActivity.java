@@ -119,7 +119,6 @@ public class SearchSeatActivity extends AppCompatActivity {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void init() {
 
         binding = ActivitySearchSeatBinding.inflate(getLayoutInflater());
@@ -138,7 +137,6 @@ public class SearchSeatActivity extends AppCompatActivity {
         animation4 = new TranslateAnimation(-1300, 0, 0, 0);
         animation4.setDuration(450);
         binding.layoutFloor.B1.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {

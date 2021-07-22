@@ -45,4 +45,7 @@ public class MainViewModel extends ViewModel {
         Repository.getInstance(mContext).addSeatHistoryToUser(userKey,seatHistoryToAdd);
     }
 
+    public void setConfirmationHistory(User confirmationUser,long confirmationTime) {
+        Repository.getInstance(mContext).setConfirmationHistory(confirmationUser,confirmationTime);
+    }
 }

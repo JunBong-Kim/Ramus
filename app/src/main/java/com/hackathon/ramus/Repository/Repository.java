@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.hackathon.ramus.Model.ConfirmationHistory;
 import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
@@ -22,6 +23,7 @@ import com.hackathon.ramus.Model.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -116,6 +118,51 @@ public class Repository {
         documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
     }
 
+    public LiveData<ArrayList<ConfirmationHistory>> getConfirmationHistory(){
+        return new FireStoreLiveData<ArrayList<ConfirmationHistory>>(db.collection(COLLECTION_NAME_OF_CONFIRMATION_HISTORY),ConfirmationHistory.class,COLLECTION);
+    }
+
+    public LiveData<ConfirmationHistory> getSpecificConfirmationHistory(String key){
+        return new FireStoreLiveData<ConfirmationHistory>(db.collection(COLLECTION_NAME_OF_CONFIRMATION_HISTORY).document(key),ConfirmationHistory.class,DOCUMENT);
+    }
+
+    public void setConfirmationHistory(User confirmationUser,long confirmationTime){
+        DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_CONFIRMATION_HISTORY).document();
+        String  key = documentReference.getId();
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put(FIELD_NAME_CONFIRMATION_HISTORY_KEY,key);
+        map.put(FIELD_NAME_CONFIRMATION_USER_KEY,confirmationUser.getUserKey());
+
+        long twoWeekAgo = confirmationTime - 3600000 * 14;
+
+        ArrayList<Seat> seats = confirmationUser.getSeatHistoryList();
+        Iterator<Seat> iter = seats.iterator();
+        while(iter.hasNext()) {
+            if(iter.next().getSeatReservationStartTime() < twoWeekAgo)iter.remove();
+        }
+
+        map.put(FIELD_NAME_CONFIRMATION_USER_HISTORY, seats);
+        map.put(FIELD_NAME_CONFIRMATION_DAY,confirmationTime);
+        documentReference.set(map);
+    }
+
+
+
+    /*
+     public static final String FIELD_NAME_CONFIRMATION_HISTORY = "confirmationHistoryKey";
+    public static final String FIELD_NAME_CONFIRMATION_USER_KEY = "confirmationUserKey";
+    public static final String FIELD_NAME_CONFIRMATION_USER_HISTORY = "seatHistoryList";
+    public static final String FIELD_NAME_CONFIRMATION_DAY = "confirmationDay";
+
+    confirmationHistoryKey : Sting
+    userKey : String
+    seatHistoryList : ArrayList<Seat>
+    confirmationDay : long’
+
+
+     */
     public void addWarningHistoryToUser(String userKey, NotificationModel notificationModel){
         DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
         documentReference.update(FIELD_NAME_USER_NOTIFICATION_HISTORY, FieldValue.arrayUnion(notificationModel));

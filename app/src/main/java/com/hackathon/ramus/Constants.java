@@ -5,6 +5,7 @@ public class Constants {
     // Collection Table Name
     public static final String COLLECTION_NAME_OF_USERS = "USERS";
     public static final String COLLECTION_NAME_OF_SEATS = "SEATS";
+    public static final String COLLECTION_NAME_OF_CONFIRMATION_HISTORY = "CONFIRMATION_HISTORY";
 
 
     //user Table Field Name
@@ -19,6 +20,22 @@ public class Constants {
     public static final String FIELD_NAME_USER_USER_SEAT = "userSeat";
     public static final String FIELD_NAME_SEAT_ROOM_NAME = "roomName";
     public static final String FIELD_NAME_USER_SEAT_HISTORY = "seatHistoryList";
+    public static final String FIELD_NAME_CONFIRMATION_HISTORY_KEY = "confirmationHistoryKey";
+    public static final String FIELD_NAME_CONFIRMATION_USER_KEY = "confirmationUserKey";
+    public static final String FIELD_NAME_CONFIRMATION_USER_HISTORY = "seatHistoryList";
+    public static final String FIELD_NAME_CONFIRMATION_DAY = "confirmationDay";
+
+    public static final String INTENT_DATA_KEY = "INTENT_DATA_KEY";
+    /*
+
+
+confirmationHistoryKey : Sting
+userKey : String
+seatHistoryList : ArrayList<Seat>
+confirmationDay : long’
+
+     */
+
     public static final String FIELD_NAME_USER_NOTIFICATION_HISTORY = "notificationHistoryList";
 
 

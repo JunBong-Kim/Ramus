@@ -2,6 +2,7 @@ package com.hackathon.ramus;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintsChangedListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -43,7 +44,10 @@ import com.hackathon.ramus.databinding.DialogConfirmedBinding;
 
 import java.lang.reflect.Field;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 
 import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_SEATS;
@@ -67,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private String userKey;
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
+
+    private User currentUser;
     Observer<User> observer;
     public Calendar cal = Calendar.getInstance();
     private boolean flag = false;
@@ -99,18 +105,11 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutSafeLibrary.informCoronaLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogConfirmedBinding binding =DialogConfirmedBinding.inflate(getLayoutInflater());
-                Dialog dialog = new Dialog(MainActivity.this);
-                dialog.setContentView(binding.getRoot());
-                //dialog.setCancelable(false);
-                setPicker(binding.pickerMonth,12);
-                binding.pickerMonth.setValue(cal.get(Calendar.MONTH) + 1);
-                setPicker(binding.pickerDay,31);
-                binding.pickerDay.setValue(cal.get(Calendar.DATE));
-
-                dialog.show();
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+                if(currentUser.getSeatHistoryList() == null || currentUser.getSeatHistoryList().size() == 0){
+                    Toast.makeText(MainActivity.this, "사용 기록이 없습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setConfirmationDialog();
             }
         });
 
@@ -215,6 +214,71 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         });
 
 
+
+        binding.layoutSafeLibrary.coronaLibraryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ConfirmationHistoryActivity.class));
+            }
+        });
+    }
+
+    private void setConfirmationDialog(){
+        DialogConfirmedBinding binding =DialogConfirmedBinding.inflate(getLayoutInflater());
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(binding.getRoot());
+        //dialog.setCancelable(false);
+        setPicker(binding.pickerMonth,12);
+        binding.pickerMonth.setValue(cal.get(Calendar.MONTH) + 1);
+        setPicker(binding.pickerDay,31);
+        binding.pickerDay.setValue(cal.get(Calendar.DATE));
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        binding.textViewCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        binding.textViewConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int month = binding.pickerMonth.getValue();
+                int day = binding.pickerDay.getValue();
+                //월, 일
+                // SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat format_year = new SimpleDateFormat("yyyy");
+
+                Date date = new Date(System.currentTimeMillis());
+                String year = format_year.format(date);
+
+                String month_mm_format,day_dd_format;
+
+                if(month <10)month_mm_format = "0" + month;
+                else month_mm_format = String.valueOf(month);
+
+                if(day < 10)day_dd_format = "0"+day;
+                else day_dd_format = String.valueOf(day);
+
+                String yyyy_MM_dd_format = year+"-"+ month_mm_format+"-"+ day_dd_format ;
+
+                long confirmation_date_to_milliseconds = 0;
+                SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date d = f.parse(yyyy_MM_dd_format);
+                    confirmation_date_to_milliseconds = d.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                viewModel.setConfirmationHistory(currentUser,confirmation_date_to_milliseconds);
+                dialog.dismiss();
+                Toast.makeText(MainActivity.this, "동선이 기록 되었습니다.\n 학우님의 쾌유를 바랍니다!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void setPicker(NumberPicker numberPicker,int max){
@@ -232,18 +296,19 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         viewModel.init(MainActivity.this);
         userKey = SharedPreferenceManager.getEmail(MainActivity.this, SharedPreferenceManager.KNU_EMAIL);
     }
-
     private void observe() {
         observer = new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                if (!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
+
+
+                currentUser = user;
+
+                 if (!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
                     if (flag) return;
                     flag = true;
-                    Log.e(TAG, "startActivity 호출");
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
-
                 } else {
                     binding.layoutMainFunction.textViewUserName.setText(user.getUserName());
                     binding.layoutMainFunction.textViewStudentId.setText(user.getUserStudentNumber());
@@ -255,8 +320,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
         viewModel.getSpecificUserLiveData(userKey).observe(this, observer);
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -277,8 +340,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
     @Override
     public void notifyPositiveButtonClick(long seatReservationEndTime) {
         Log.e(TAG, "notifyPositiveButtonClick: " + seatReservationEndTime + "\n" + seatKey);
@@ -286,7 +347,6 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         seatKey = "CRETECZONE10";
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
-
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -310,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                         viewModel.updateUserNewSeatKey(userKey, seatKey);
                     }
 
-                    String roomNumber = seatKey.replaceAll("\\D+", "");
+                    String roomNumber =  seatKey.substring(seatKey.length()-2);
                     Seat seat = new Seat(seatKey, userKey, seatReservationEndTime, roomNumber, System.currentTimeMillis());
                     viewModel.addSeatHistoryToUser(userKey, seat);
                 }

@@ -79,6 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/textView_cancle"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:gravity="center"
@@ -96,6 +97,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/textView_confirm"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"

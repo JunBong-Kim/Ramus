@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ramus"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DaeguCovidConfirmationActivity"></activity>
+        <activity android:name=".SpecificConfirmationHistoryActivity"></activity>
+        <activity android:name=".ConfirmationHistoryActivity" />
+        <activity android:name=".DaeguCovidConfirmationActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".OccupiedMainActivity" />
         <activity android:name=".UserRegisterActivity" />
@@ -26,25 +28,19 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
         <activity android:name=".EmailSignUpActivity" />
-        <activity android:name=".EmailAuthLoginActivity">
-
-        </activity>
-        <activity android:name=".MaintestActivity">
-
-        </activity>
+        <activity android:name=".EmailAuthLoginActivity" />
+        <activity android:name=".MaintestActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
-        <activity android:name=".SearchSeatActivity">
-        </activity>
+        <activity android:name=".SearchSeatActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".StudyRoomActivity"/>
+        <activity android:name=".StudyRoomActivity" />
 
         <service
             android:name=".Notification.FirebaseNotificationService"
@@ -54,9 +50,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".MyHistoryActivity"/>
-        <activity android:name=".FindBadStudentActivity"/>
-
+        <activity android:name=".MyHistoryActivity" />
+        <activity android:name=".FindBadStudentActivity" />
     </application>
 
 </manifest>
