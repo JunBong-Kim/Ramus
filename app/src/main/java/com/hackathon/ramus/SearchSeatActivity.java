@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class SearchSeatActivity extends AppCompatActivity {
     private ActivitySearchSeatBinding binding;
     private SeatViewModel viewModel;
     private ConstraintLayout constraintLayout1, constraintLayout2;
-    private Animation animation, animation2;
+    private Animation animation, animation2 ,animation3 ,animation4;
     private int[] emptySeats = new int[15];
     private String[] testString = {"제1열람실A", "제1열람실B", "제1열람실노트북석", "CRETECZONE", "S-Lounge", "캐럴", "제2열람실A", "제2열람실B"
             , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
@@ -130,6 +131,10 @@ public class SearchSeatActivity extends AppCompatActivity {
         animation.setDuration(450);
         animation2 = AnimationUtils.loadAnimation(this, R.anim.ani_left);
         animation2.setDuration(450);
+        animation3 = new TranslateAnimation(0, 1300, 0, 0);
+        animation3.setDuration(450);
+        animation4 = new TranslateAnimation(-1300, 0, 0, 0);
+        animation4.setDuration(450);
         binding.layoutFloor.B1.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -282,9 +287,9 @@ public class SearchSeatActivity extends AppCompatActivity {
             finish();
         } else if (constraintLayout2.getVisibility() == View.VISIBLE) {
             constraintLayout1.setVisibility(View.VISIBLE);
-            constraintLayout1.startAnimation(animation2);
+            constraintLayout1.startAnimation(animation4);
             constraintLayout2.setVisibility(View.GONE);
-            constraintLayout2.startAnimation(animation);
+            constraintLayout2.startAnimation(animation3);
         }
     }
 

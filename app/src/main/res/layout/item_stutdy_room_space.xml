@@ -6,13 +6,15 @@
     android:layout_height="30dp"
     >
 
-    <ImageView
-        android:id="@+id/imageView_pillar"
+    <TextView
+        android:id="@+id/info_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:textSize="11dp"
+        android:fontFamily="@font/spoqahansans_medium"
+        android:textColor="@color/icon_cliked"
         android:background="@drawable/rec_seat_gray"
-        android:src="@drawable/warning"
         />
 
 

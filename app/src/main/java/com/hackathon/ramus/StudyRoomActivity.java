@@ -34,8 +34,14 @@ import java.util.List;
 
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_NO;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_NO_THIN;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_DOWN;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_UP;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_DOWN;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_UP;
 import static com.hackathon.ramus.Constants.SEAT_TYPE_YES;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_YES_SPACE;
 
 public class StudyRoomActivity extends AppCompatActivity implements MyListener {
     private String TAG = "StudyRoomActivity";
@@ -52,7 +58,7 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
         super.onCreate(savedInstanceState);
 
         init();
-        setDummyData();
+        setDummyData2();
 
         Intent intent = getIntent();
         roomName = intent.getStringExtra("roomname");
@@ -61,7 +67,7 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        int numberOfColumns = 7;
+        int numberOfColumns = 9;
         //2랑 5 빈
         recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         adapter = new StudyRoomAdapter(this, seatItems);
@@ -111,6 +117,60 @@ public class StudyRoomActivity extends AppCompatActivity implements MyListener {
         }
 
     }
+
+    private void setDummyData2(){
+        int realnumber=1;
+        for(int i=0;i<171;i++){
+            String number;
+            if(i<10) number = "0"+i;
+            else number = String.valueOf(i);
+
+            Log.e(TAG, "setDummyData: " + number );
+            int type = SEAT_TYPE_YES;
+            if(i%9 == 2 || i%9 == 5)type = SEAT_TYPE_NO;
+
+            if(i/9 == 4)type = SEAT_TYPE_NO_THIN;
+            if(i/9 == 9)type = SEAT_TYPE_NO_THIN;
+            if(i/9 == 14)type = SEAT_TYPE_NO_THIN;
+
+            if(i==48 || i==111)type= SEAT_TYPE_PILLAR_LEFT_UP;
+            if(i==49 || i==112)type= SEAT_TYPE_PILLAR_RIGHT_UP;
+            if(i==57 || i==120)type = SEAT_TYPE_PILLAR_LEFT_DOWN;
+            if(i==58 || i==121)type = SEAT_TYPE_PILLAR_RIGHT_DOWN;
+            if(i%9 == 8)type = SEAT_TYPE_NO;
+
+            if(type==SEAT_TYPE_YES)
+            {
+                String rn;
+                if(realnumber<10)
+                    rn = "0"+realnumber;
+                else
+                    rn = String.valueOf(realnumber);
+                if(i%2==1) {
+                    type = SEAT_TYPE_YES_SPACE;
+                }
+                seatItems.add(new SeatItem("제1열람실A"+rn,
+                        DATA_USER_SEAT_NULL,
+                        System.currentTimeMillis()+10000000,
+                        "제1열람실A",
+                        System.currentTimeMillis(),
+                        type));
+                realnumber++;
+            }
+            else
+            {
+                seatItems.add(new SeatItem("제1열람실A쓰레기"+number,
+                        DATA_USER_SEAT_NULL,
+                        System.currentTimeMillis()+10000000,
+                        "제1열람실A",
+                        System.currentTimeMillis(),
+                        type));
+            }
+        }
+
+    }
+
+
 
     private void init(){
         binding = ActivityStudyRoomBinding.inflate(getLayoutInflater());

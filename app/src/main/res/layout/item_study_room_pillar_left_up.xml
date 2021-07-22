@@ -4,16 +4,14 @@
     android:orientation="horizontal"
     android:layout_width="38dp"
     android:layout_height="30dp"
+    android:gravity="right"
     >
-
     <ImageView
         android:id="@+id/imageView_pillar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:paddingTop="15dp"
+        android:layout_width="15dp"
+        android:layout_height="30dp"
         android:gravity="center"
-        android:background="@drawable/rec_seat_gray"
-        android:src="@drawable/warning"
+        android:src="@color/icon_uncliked"
         />
-
-
 </LinearLayout>

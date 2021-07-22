@@ -2,17 +2,18 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="38dp"
-    android:layout_height="30dp"
+    android:layout_width="30dp"
+    android:layout_height="15dp"
     >
 
-    <ImageView
-        android:id="@+id/imageView_pillar"
+    <TextView
+        android:id="@+id/info_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@drawable/rec_seat_gray"
-        android:src="@drawable/warning"
+        android:fontFamily="@font/spoqahansans_medium"
+        android:textColor="@color/icon_cliked"
+        android:background="@color/blue"
         />
 
 

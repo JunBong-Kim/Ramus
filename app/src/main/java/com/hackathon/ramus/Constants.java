@@ -34,9 +34,15 @@ public class Constants {
     public static final int TYPE_NAVER = 4;
 
 
+    public static final int SEAT_TYPE_NO_THIN = 4;
     public static final int SEAT_TYPE_NO = 0;
     public static final int SEAT_TYPE_YES= 1;
+    public static final int SEAT_TYPE_YES_SPACE= 9;
     public static final int SEAT_TYPE_PILLAR = 2;
+    public static final int SEAT_TYPE_PILLAR_LEFT_UP = 5;
+    public static final int SEAT_TYPE_PILLAR_RIGHT_UP = 6;
+    public static final int SEAT_TYPE_PILLAR_LEFT_DOWN = 7;
+    public static final int SEAT_TYPE_PILLAR_RIGHT_DOWN = 8;
     /*
 
 
