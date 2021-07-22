@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.hackathon.ramus.Model.NotiElseModel;
 import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
@@ -31,7 +32,7 @@ public class StudyRoomViewModel extends ViewModel {
         return Repository.getInstance(mContext).getSpecificUserData(userKey);
     }
 
-    public void addWarningHistoryToUser(String userKey, NotificationModel notificationModel) {
-        Repository.getInstance(mContext).addWarningHistoryToUser(userKey, notificationModel);
+    public void addWarningHistoryToUser(String userKey, NotiElseModel notiElseModel) {
+        Repository.getInstance(mContext).addWarningHistoryToUser(userKey, notiElseModel);
     }
 }

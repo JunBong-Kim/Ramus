@@ -33,16 +33,15 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        // Toast.makeText(this, "receive", Toast.LENGTH_SHORT).show();
+
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "onMessageReceived: 1");
-            makeCustomNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
-          //  addWarningHistoryToUser()
+            makeCustomNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
         } else if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "onMessageReceived: 2");
             String tittle = remoteMessage.getData().get("notificationTitle");
             String text = remoteMessage.getData().get("notificationBody");
-            makeCustomNotification(tittle, text);
+            // makeCustomNotification(tittle, text);
         }
         Log.d(TAG, "onMessageReceived");
     }

@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.hackathon.ramus.Model.ConfirmationHistory;
+import com.hackathon.ramus.Model.NotiElseModel;
 import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
@@ -118,6 +119,10 @@ public class Repository {
         documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
     }
 
+    public void addWarningHistoryToUser(String userKey, NotiElseModel notiElseModel){
+        DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
+        documentReference.update(FIELD_NAME_USER_NOTIFICATION_HISTORY, FieldValue.arrayUnion(notiElseModel));
+    }
     public LiveData<ArrayList<ConfirmationHistory>> getConfirmationHistory(){
         return new FireStoreLiveData<ArrayList<ConfirmationHistory>>(db.collection(COLLECTION_NAME_OF_CONFIRMATION_HISTORY),ConfirmationHistory.class,COLLECTION);
     }
@@ -163,11 +168,6 @@ public class Repository {
 
 
      */
-    public void addWarningHistoryToUser(String userKey, NotificationModel notificationModel){
-        DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
-        documentReference.update(FIELD_NAME_USER_NOTIFICATION_HISTORY, FieldValue.arrayUnion(notificationModel));
-    }
-
 
 
 

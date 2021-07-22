@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +35,7 @@ import com.hackathon.ramus.Dialog.ConfirmSeatDialog;
 import com.hackathon.ramus.Dialog.MyListener;
 import com.hackathon.ramus.Dialog.WarningDialog;
 import com.hackathon.ramus.Dialog.WarningListener;
+import com.hackathon.ramus.Model.NotiElseModel;
 import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.SeatItem;
@@ -86,8 +86,7 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
         Intent intent = getIntent();
         roomName = intent.getStringExtra("roomname");
         binding.roomName.setText(roomName);
-        //Toast.makeText(this, roomName, Toast.LENGTH_SHORT).show();
-        //observe();
+
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
@@ -167,10 +166,12 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
     }
 
     private void observe() {
+        if (roomName.equals("CRETEC Zone")) {
+            roomName = roomName.toUpperCase();
+        }
         viewModel.getSpecificRoomListData(roomName.replaceAll(" ", ""), "roomName").observe(this, new Observer<List<Seat>>() {
             @Override
             public void onChanged(List<Seat> seats) {
-                Toast.makeText(StudyRoomActivity.this, "1111", Toast.LENGTH_SHORT).show();
                 adapter.setSeatData(seats);
             }
         });
@@ -198,12 +199,13 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = documentSnapshot.toObject(User.class);
+                NotificationModel notiModel = new NotificationModel(classifiedTitle(type), classifiedBody(type));
+                NotiElseModel elseModel = new NotiElseModel(type, userKey, System.currentTimeMillis());
                 SendNotification sendNotification = new SendNotification(user.getUserFcmToken(), StudyRoomActivity.this);
-                sendNotification.send(type, new Callback<MyResponse>() {
+                sendNotification.send(notiModel, elseModel, new Callback<MyResponse>() {
                     @Override
                     public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                        NotificationModel notificationModel = new NotificationModel(type, userKey, System.currentTimeMillis());
-                        viewModel.addWarningHistoryToUser(userKey, notificationModel);
+                        viewModel.addWarningHistoryToUser(userKey, elseModel);
                     }
 
                     @Override
@@ -213,5 +215,31 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
                 });
             }
         });
+    }
+
+    private String classifiedTitle(int type) {
+        switch (type) {
+            case 1:
+                return "마스크를 착용해 주세요";
+            case 2:
+                return "시끄럽습니다.";
+            case 3:
+                return "너무 많이 비워두지마세요";
+            default:
+                return "";
+        }
+    }
+
+    private String classifiedBody(int type) {
+        switch (type) {
+            case 1:
+                return "마스크를 착용";
+            case 2:
+                return "조용해주세요.";
+            case 3:
+                return "공용의 자리입니다.";
+            default:
+                return "";
+        }
     }
 }

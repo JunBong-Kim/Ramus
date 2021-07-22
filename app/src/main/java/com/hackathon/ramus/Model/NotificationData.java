@@ -6,11 +6,14 @@ public class NotificationData {
     @SerializedName("to")
     private String token;
     @SerializedName("notification")
-    private NotificationModel notificationModel;
+    private NotificationModel notification;
+    @SerializedName("data")
+    private NotiElseModel data;
 
-    public NotificationData(String token, NotificationModel notificationModel) {
+    public NotificationData(String token, NotificationModel notification, NotiElseModel data) {
         this.token = token;
-        this.notificationModel = notificationModel;
+        this.notification = notification;
+        this.data = data;
     }
 
     public String getToken() {
@@ -21,11 +24,19 @@ public class NotificationData {
         this.token = token;
     }
 
-    public NotificationModel getNotificationModel() {
-        return notificationModel;
+    public NotificationModel getNotification() {
+        return notification;
     }
 
-    public void setNotificationModel(NotificationModel notificationModel) {
-        this.notificationModel = notificationModel;
+    public void setNotification(NotificationModel notification) {
+        this.notification = notification;
+    }
+
+    public NotiElseModel getData() {
+        return data;
+    }
+
+    public void setData(NotiElseModel data) {
+        this.data = data;
     }
 }
