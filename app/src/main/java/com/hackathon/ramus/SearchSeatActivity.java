@@ -44,7 +44,7 @@ public class SearchSeatActivity extends AppCompatActivity {
     private ActivitySearchSeatBinding binding;
     private SeatViewModel viewModel;
     private ConstraintLayout constraintLayout1, constraintLayout2;
-    private Animation animation, animation2 ,animation3 ,animation4;
+    private Animation animation, animation2, animation3, animation4;
     private int[] emptySeats = new int[15];
     private String[] testString = {"제1열람실A", "제1열람실B", "제1열람실노트북석", "CRETECZONE", "S-Lounge", "캐럴", "제2열람실A", "제2열람실B"
             , "제2열람실C", "제3열람실A", "제3열람실B", "제3열람실C", "제4열람실A", "제4열람실B", "제4열람실C"};
@@ -53,7 +53,7 @@ public class SearchSeatActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private int select;
 
-    private int[] images= new int[4];
+    private int[] images = new int[4];
 
 
     @Override
@@ -65,8 +65,7 @@ public class SearchSeatActivity extends AppCompatActivity {
     }
 
 
-
-    private void setupHomeImage () {
+    private void setupHomeImage() {
         images[0] = R.drawable.library_image1;
         images[1] = R.drawable.library_image2;
         images[2] = R.drawable.library_image3;
@@ -90,7 +89,7 @@ public class SearchSeatActivity extends AppCompatActivity {
 
         for (int i = 0; i < 15; i++) {
             int finalI = i;
-            viewModel.getSpecificRoomListData(testString[i],"roomName").observe(this, new Observer<List<Seat>>() {
+            viewModel.getSpecificRoomListData(testString[i], "roomName").observe(this, new Observer<List<Seat>>() {
                 @Override
                 public void onChanged(List<Seat> seats) {
                     int cnt = 0;
@@ -103,11 +102,14 @@ public class SearchSeatActivity extends AppCompatActivity {
                     emptySeats[finalI] = cnt;
                     if (finalI / 3 == select) {
                         if (finalI % 3 == 0) {
-                            binding.layoutRoom.textviewFirst.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                            binding.layoutRoom.first.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.first.peopleRemain.setText("" + cnt);
                         } else if (finalI % 3 == 1) {
-                            binding.layoutRoom.textviewSecond.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                            binding.layoutRoom.second.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.second.peopleRemain.setText("" + cnt);
                         } else {
-                            binding.layoutRoom.textviewThird.setText(roomNames[finalI] + " (" + cnt + "/100)");
+                            binding.layoutRoom.third.prgressbar.setProgress((int) (((double) cnt / 88.0) * 100));
+                            binding.layoutRoom.third.peopleRemain.setText("" + cnt);
                         }
                     }
                 }
@@ -146,20 +148,20 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewSecond.setText("제1열람실 B");
                     binding.layoutRoom.textviewThird.setText("제1열람실 노트북석");
 
-                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[0]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[1]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[2]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[0]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[0] / 88.0) * 100));
+                    binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[1]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[1] / 88.0) * 100));
+                    binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[2]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[2] / 88.0) * 100));
 
-                    //만석이면
+                   /* //만석이면
                     binding.layoutRoom.first.prgressbar.setProgressStartColor(getColor(R.color.red_progress));
                     binding.layoutRoom.first.prgressbar.setProgressEndColor(getColor(R.color.red_progress));
 
                     //만석아니면
                     //binding.layoutRoom.first.prgressbar.setProgressStartColor(getColor(R.color.blue_progress));
-                    //binding.layoutRoom.first.prgressbar.setProgressEndColor(getColor(R.color.blue_progress));
+                    //binding.layoutRoom.first.prgressbar.setProgressEndColor(getColor(R.color.blue_progress));*/
 
                     select = 0;
                 }
@@ -177,13 +179,12 @@ public class SearchSeatActivity extends AppCompatActivity {
                     select = 1;
 
 
-
-                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[3]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[3]/100.0)*100));
-                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[4]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[4]/100.0)*100));
-                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[5]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[5]/100.0)*100));
+                    binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[3]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[3] / 88.0) * 100));
+                    binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[4]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[4] / 88.0) * 100));
+                    binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[5]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[5] / 88.0) * 100));
                 }
             }
         });
@@ -197,12 +198,12 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewThird.setText("제2열람실 C");
                     select = 2;
 
-                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[6]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[6]/100.0)*100));
-                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[7]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[7]/100.0)*100));
-                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[8]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[8]/100.0)*100));
+                    binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[6]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[6] / 88.0) * 100));
+                    binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[7]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[7] / 88.0) * 100));
+                    binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[8]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[8] / 88.0) * 100));
                 }
             }
         });
@@ -216,12 +217,12 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewThird.setText("제3열람실 C");
                     select = 3;
 
-                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[9]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[10]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[11]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[9]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[9] / 88.0) * 100));
+                    binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[10]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[10] / 88.0) * 100));
+                    binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[11]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[11] / 88.0) * 100));
                 }
             }
         });
@@ -235,12 +236,12 @@ public class SearchSeatActivity extends AppCompatActivity {
                     binding.layoutRoom.textviewThird.setText("제4열람실 C");
                     select = 4;
 
-                    binding.layoutRoom.first.peopleRemain.setText(""+emptySeats[12]);
-                    binding.layoutRoom.first.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.second.peopleRemain.setText(""+emptySeats[13]);
-                    binding.layoutRoom.second.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
-                    binding.layoutRoom.third.peopleRemain.setText(""+emptySeats[14]);
-                    binding.layoutRoom.third.prgressbar.setProgress((int)(((double)emptySeats[0]/100.0)*100));
+                    binding.layoutRoom.first.peopleRemain.setText("" + emptySeats[12]);
+                    binding.layoutRoom.first.prgressbar.setProgress((int) (((double) emptySeats[12] / 88.0) * 100));
+                    binding.layoutRoom.second.peopleRemain.setText("" + emptySeats[13]);
+                    binding.layoutRoom.second.prgressbar.setProgress((int) (((double) emptySeats[13] / 88.0) * 100));
+                    binding.layoutRoom.third.peopleRemain.setText("" + emptySeats[14]);
+                    binding.layoutRoom.third.prgressbar.setProgress((int) (((double) emptySeats[14] / 88.0) * 100));
                 }
 
             }
@@ -259,7 +260,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
-                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
+                overridePendingTransition(R.anim.ani_left, R.anim.ani_right);
             }
         });
         binding.layoutRoom.secondRoom.setOnClickListener(new View.OnClickListener() {
@@ -269,7 +270,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
-                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
+                overridePendingTransition(R.anim.ani_left, R.anim.ani_right);
             }
         });
         binding.layoutRoom.thirdRoom.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +280,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchSeatActivity.this, StudyRoomActivity.class);
                 intent.putExtra("roomname", roomName);
                 startActivity(intent);
-                overridePendingTransition(R.anim.ani_left,R.anim.ani_right);
+                overridePendingTransition(R.anim.ani_left, R.anim.ani_right);
             }
         });
     }
@@ -306,9 +307,7 @@ public class SearchSeatActivity extends AppCompatActivity {
 
     private String getRoomName(TextView textView) {
         String a = textView.getText().toString();
-        int index = a.indexOf("(");
-        a = a.substring(0, index);
-        a = a.replaceAll(" ", "");
+        //      a = a.replaceAll(" ", "");
         return a;
     }
 }

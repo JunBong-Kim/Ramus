@@ -1,27 +1,60 @@
 package com.hackathon.ramus.Model;
 
 public class NotificationModel {
-    private String title;
-    private String body;
+    private String notificationTitle;
+    private String notificationBody;
+    private int notificationType;
+    private String receiveUserKey;
+    private double notificationTime;
 
-    public NotificationModel(String title, String body) {
-        this.title = title;
-        this.body = body;
+    public NotificationModel(String notificationTitle, String notificationBody) {
+        this.notificationTitle = notificationTitle;
+        this.notificationBody = notificationBody;
     }
 
-    public String getTitle() {
-        return title;
+    public NotificationModel(int notificationType, String receiveUserKey, double notificationTime) {
+        this.notificationType = notificationType;
+        this.receiveUserKey = receiveUserKey;
+        this.notificationTime = notificationTime;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNotificationTitle() {
+        return notificationTitle;
     }
 
-    public String getBody() {
-        return body;
+    public void setNotificationTitle(String notificationTitle) {
+        this.notificationTitle = notificationTitle;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public String getNotificationBody() {
+        return notificationBody;
+    }
+
+    public void setNotificationBody(String notificationBody) {
+        this.notificationBody = notificationBody;
+    }
+
+    public int getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(int notificationType) {
+        this.notificationType = notificationType;
+    }
+
+    public String getReceiveUserKey() {
+        return receiveUserKey;
+    }
+
+    public void setReceiveUserKey(String receiveUserKey) {
+        this.receiveUserKey = receiveUserKey;
+    }
+
+    public double getNotificationTime() {
+        return notificationTime;
+    }
+
+    public void setNotificationTime(double notificationTime) {
+        this.notificationTime = notificationTime;
     }
 }

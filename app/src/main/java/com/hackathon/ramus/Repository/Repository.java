@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 
@@ -114,6 +115,13 @@ public class Repository {
         DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
         documentReference.update(FIELD_NAME_USER_SEAT_HISTORY, FieldValue.arrayUnion(seatHistoryToAdd));
     }
+
+    public void addWarningHistoryToUser(String userKey, NotificationModel notificationModel){
+        DocumentReference documentReference = db.collection(COLLECTION_NAME_OF_USERS).document(userKey);
+        documentReference.update(FIELD_NAME_USER_NOTIFICATION_HISTORY, FieldValue.arrayUnion(notificationModel));
+    }
+
+
 
 
 }

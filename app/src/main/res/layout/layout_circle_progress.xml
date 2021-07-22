@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/text_third"
             android:fontFamily="@font/spoqahansans_bold"
-            android:text="99"
+            android:text="88"
             android:textSize="14dp"
             >
         </TextView>

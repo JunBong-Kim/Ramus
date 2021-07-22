@@ -37,10 +37,11 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "onMessageReceived: 1");
             makeCustomNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
+          //  addWarningHistoryToUser()
         } else if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "onMessageReceived: 2");
-            String tittle = remoteMessage.getData().get("tittle");
-            String text = remoteMessage.getData().get("text");
+            String tittle = remoteMessage.getData().get("notificationTitle");
+            String text = remoteMessage.getData().get("notificationBody");
             makeCustomNotification(tittle, text);
         }
         Log.d(TAG, "onMessageReceived");

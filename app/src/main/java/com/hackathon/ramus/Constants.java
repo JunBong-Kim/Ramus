@@ -19,6 +19,7 @@ public class Constants {
     public static final String FIELD_NAME_USER_USER_SEAT = "userSeat";
     public static final String FIELD_NAME_SEAT_ROOM_NAME = "roomName";
     public static final String FIELD_NAME_USER_SEAT_HISTORY = "seatHistoryList";
+    public static final String FIELD_NAME_USER_NOTIFICATION_HISTORY = "notificationHistoryList";
 
 
     public static final String INTENT_DATA_NUMBER = "INTENT_DATA_NUMBER";
