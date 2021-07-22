@@ -38,7 +38,15 @@ import com.hackathon.ramus.Viewmodel.SeatViewModel;
 import com.hackathon.ramus.databinding.ActivityEmailSignUpBinding;
 import com.hackathon.ramus.databinding.ActivitySearchSeatBinding;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.hackathon.ramus.Constants.SEAT_TYPE_NO;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_NO_THIN;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_DOWN;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_LEFT_UP;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_DOWN;
+import static com.hackathon.ramus.Constants.SEAT_TYPE_PILLAR_RIGHT_UP;
 
 public class SearchSeatActivity extends AppCompatActivity {
     private ActivitySearchSeatBinding binding;
@@ -52,6 +60,7 @@ public class SearchSeatActivity extends AppCompatActivity {
             , "제 2열람실 C", "제 3열람실 A", "제 3열람실 B", "제 3열람실 C", "제 4열람실 A", "제 4열람실 B", "제 4열람실 C"};
     private TextView[] floorTexts = new TextView[5];
     private String[] floorStrings = {"B1", "1층", "2층", "3층", "4층"};
+    private List<Integer> seatPossible= new ArrayList<>();
     FirebaseAuth mAuth;
     private int select;
 
@@ -61,6 +70,20 @@ public class SearchSeatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int abc=1;
+        for(int i=0;i<171;i++){
+            if (i % 9 == 2 || i % 9 == 5) continue;
+            if (i / 9 == 4) continue;
+            if (i / 9 == 9) continue;
+            if (i / 9 == 14) continue;
+            if (i == 48 || i == 111) continue;
+            if (i == 49 || i == 112) continue;
+            if (i == 57 || i == 120) continue;
+            if (i == 58 || i == 121) continue;
+            if (i % 9 == 8) continue;
+            seatPossible.add(abc);
+            abc++;
+        }
         getLiveData();
         init();
         setupHomeImage();
@@ -97,7 +120,7 @@ public class SearchSeatActivity extends AppCompatActivity {
                     int cnt = 0;
                     long time = System.currentTimeMillis();
                     for (int j = 0; j < seats.size(); j++) {
-                        if (seats.get(j).getSeatReservationEndTime() < time && j % 2 == 1) {
+                        if (seats.get(j).getSeatReservationEndTime() < time && seatPossible.contains(j+1)) {
                             cnt++;
                         }
                     }

@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         Log.e(TAG, "notifyPositiveButtonClick: " + seatReservationEndTime + "\n" + seatKey);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        seatKey = "S-Lounge01";
+
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
