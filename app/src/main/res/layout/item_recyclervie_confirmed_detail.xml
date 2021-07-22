@@ -108,7 +108,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/spoqahansans_medium"
                 android:text="확진일 - 7월 22일"
-                android:textColor="@color/primary"
+                android:textColor="@color/text_third"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
