@@ -274,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     e.printStackTrace();
                 }
 
+
                 viewModel.setConfirmationHistory(currentUser,confirmation_date_to_milliseconds);
                 dialog.dismiss();
                 Toast.makeText(MainActivity.this, "동선이 기록 되었습니다.\n 학우님의 쾌유를 바랍니다!", Toast.LENGTH_SHORT).show();
@@ -346,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         Log.e(TAG, "notifyPositiveButtonClick: " + seatReservationEndTime + "\n" + seatKey);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        seatKey = "CRETECZONE10";
+        seatKey = "S-Lounge01";
         //여기에 이제 qr찍은 string 이 들어감 원래는, 임시로 1열람실23
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -355,10 +356,10 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         String seatKey = String.valueOf(document.getData().get(FIELD_NAME_SEAT_KEY));
-                        long seatReservationEndTime = Long.valueOf(String.valueOf(document.getData().get(FIELD_NAME_SEAT_RESERVATION_END_TIME)));
+                        long alreadySeatReservationEndTime = Long.valueOf(String.valueOf(document.getData().get(FIELD_NAME_SEAT_RESERVATION_END_TIME)));
                         //자리가 있을때는, 상대방의 키 없애고,
                         String alreadySeatUserKey = document.getData().get(FIELD_NAME_SEAT_USER_KEY).toString();
-                        if (seatReservationEndTime > System.currentTimeMillis() && !alreadySeatUserKey.equals(DATA_USER_SEAT_NULL)) {
+                        if (alreadySeatReservationEndTime > System.currentTimeMillis() && !alreadySeatUserKey.equals(DATA_USER_SEAT_NULL)) {
                             viewModel.updateUserNewSeatKey(alreadySeatUserKey, DATA_USER_SEAT_NULL);
                         }
 

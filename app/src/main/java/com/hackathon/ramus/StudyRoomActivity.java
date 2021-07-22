@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -87,7 +88,7 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
         roomName = intent.getStringExtra("roomname");
         binding.roomName.setText(roomName);
 
-
+        Toast.makeText(this, "" + roomName, Toast.LENGTH_SHORT).show();
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         int numberOfColumns = 9;
@@ -169,6 +170,8 @@ public class StudyRoomActivity extends AppCompatActivity implements WarningListe
         if (roomName.equals("CRETEC Zone")) {
             roomName = roomName.toUpperCase();
         }
+
+
         viewModel.getSpecificRoomListData(roomName.replaceAll(" ", ""), "roomName").observe(this, new Observer<List<Seat>>() {
             @Override
             public void onChanged(List<Seat> seats) {

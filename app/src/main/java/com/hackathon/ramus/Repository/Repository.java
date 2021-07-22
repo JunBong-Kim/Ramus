@@ -21,7 +21,9 @@ import com.hackathon.ramus.Model.NotificationModel;
 import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import java.util.Iterator;
@@ -75,7 +77,15 @@ public class Repository {
         Map<String, Object> map = new HashMap<>();
         map.put(FIELD_NAME_SEAT_USER_KEY, userKey);
         map.put(FIELD_NAME_SEAT_RESERVATION_END_TIME, seatReservationEndTime);
+        Log.e(TAG, "updateSeatNewUserKeyAndNewEndTime: " +  longToTime(seatReservationEndTime));
+        map.put(FIELD_NAME_SEAT_RESERVATION_START_TIME,System.currentTimeMillis());
         db.collection(COLLECTION_NAME_OF_SEATS).document(seatKey).update(map);
+    }
+
+    private String longToTime(long in){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(in);
+        return sdf.format(date);
     }
 
     public void initdata(Seat seat) {

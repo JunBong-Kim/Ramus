@@ -171,7 +171,7 @@ public class SearchSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (constraintLayout1.getVisibility() == View.VISIBLE) {
                     startAni();
-                    binding.layoutRoom.textviewFirst.setText("CRETEC Zone");
+                    binding.layoutRoom.textviewFirst.setText("CRETECZONE");
                     binding.layoutRoom.textviewSecond.setText("S-Lounge");
                     binding.layoutRoom.textviewThird.setText("캐럴");
                     select = 1;
