@@ -118,10 +118,24 @@ public class MainActivity extends AppCompatActivity implements MyListener {
         binding.layoutMainFunction.layoutQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
-                qrScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
-                qrScan.setPrompt("이용하실 열람실 좌석의 qr코드를 찍어주세요\n\n");
-                qrScan.initiateScan();
+                DialogPosterBinding binding =DialogPosterBinding.inflate(getLayoutInflater());
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(binding.getRoot());
+                //dialog.setCancelable(false);
+                dialog.show();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                binding.close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
+                        qrScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
+                        qrScan.setPrompt("이용하실 열람실 좌석의 qr코드를 찍어주세요\n\n");
+                        qrScan.initiateScan();
+                        dialog.dismiss();
+                    }
+                });
+
+
             }
         });
 
@@ -310,18 +324,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
                  if (!user.getUserSeat().equals(DATA_USER_SEAT_NULL)) {
                     if (flag) return;
                     flag = true;
-                     DialogPosterBinding binding =DialogPosterBinding.inflate(getLayoutInflater());
-                     Dialog dialog = new Dialog(MainActivity.this);
-                     dialog.setContentView(binding.getRoot());
-                     //dialog.setCancelable(false);
-                     dialog.show();
-                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                     binding.close.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View v) {
-                             dialog.dismiss();
-                         }
-                     });
+
                     startActivity(new Intent(getApplicationContext(), OccupiedMainActivity.class));
                     finish();
                 } else {
