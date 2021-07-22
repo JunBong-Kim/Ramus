@@ -150,7 +150,7 @@ public class StudyRoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             if (mClickListener != null)
-                mClickListener.onItemClick(view, seats.get(Integer.parseInt(seatItems.get(getAdapterPosition()).getCnt())));
+                mClickListener.onItemClick(view, seats.get(Integer.parseInt(seatItems.get(getAdapterPosition()).getCnt())-1));
         }
     }
 
