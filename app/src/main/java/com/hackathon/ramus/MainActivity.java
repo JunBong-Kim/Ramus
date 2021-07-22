@@ -41,6 +41,7 @@ import com.hackathon.ramus.databinding.ActivityMainBinding;
 import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
 import com.hackathon.ramus.databinding.DialogBedStudentBinding;
 import com.hackathon.ramus.databinding.DialogConfirmedBinding;
+import com.hackathon.ramus.databinding.DialogPosterBinding;
 
 import java.lang.reflect.Field;
 
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-
+        
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +17,12 @@ import com.hackathon.ramus.Model.Seat;
 import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.OccupiedMainViewModel;
 import com.hackathon.ramus.databinding.ActivityOccupiedMainBinding;
+import com.hackathon.ramus.databinding.DialogConfirmedBinding;
+import com.hackathon.ramus.databinding.DialogFinishStudyBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
@@ -44,11 +49,7 @@ public class OccupiedMainActivity extends AppCompatActivity {
         binding.layoutMain2Function.layoutFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //seatReservationTime 에 있는 시간을 현재 시간으로 바꾸고,
-                //seatUserKey 도 NULL 로 바꾸고
-                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat, DATA_USER_SEAT_NULL, System.currentTimeMillis());
-                //userSeat 도 NULL 로 바꾼다
-                viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
+                setDialogFinish();
             }
         });
         binding.layoutMain2Function.layoutReport.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +139,33 @@ public class OccupiedMainActivity extends AppCompatActivity {
 
 
     }
+
+    private void setDialogFinish()
+    {
+        DialogFinishStudyBinding binding =DialogFinishStudyBinding.inflate(getLayoutInflater());
+        Dialog dialog = new Dialog(OccupiedMainActivity.this);
+        dialog.setContentView(binding.getRoot());
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        binding.buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        binding.buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //seatReservationTime 에 있는 시간을 현재 시간으로 바꾸고,
+                //seatUserKey 도 NULL 로 바꾸고
+                viewModel.updateSeatNewUserKeyAndNewEndTime(userSeat, DATA_USER_SEAT_NULL, System.currentTimeMillis());
+                //userSeat 도 NULL 로 바꾼다
+                viewModel.updateUserNewSeatKey(userKey, DATA_USER_SEAT_NULL);
+            }
+        });
+    }
+
 
     private void observe() {
 
