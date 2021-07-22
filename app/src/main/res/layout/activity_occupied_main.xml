@@ -28,7 +28,6 @@
                 android:elevation="3dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/rec_main_primary"
-                android:paddingBottom="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -79,6 +78,7 @@
                 </TextView>
 
                 <ImageView
+                    android:background="@drawable/ripple_custom_circle"
                     android:id="@+id/youtube"
                     android:layout_marginRight="100dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +89,7 @@
                     android:layout_height="30dp">
                 </ImageView>
                 <ImageView
+                    android:background="@drawable/ripple_custom_circle"
                     android:id="@+id/instagram"
                     android:padding="5dp"
                     android:layout_marginRight="65dp"
@@ -99,6 +100,7 @@
                     android:layout_height="30dp">
                 </ImageView>
                 <ImageView
+                    android:background="@drawable/ripple_custom_circle"
                     android:id="@+id/facebook"
                     android:padding="5dp"
                     android:layout_marginRight="30dp"

@@ -10,12 +10,8 @@
             <solid android:color="@color/icon_cliked" />
 
 
-            <corners
-                android:bottomLeftRadius="24dp"
-                />
 
         </shape>
-
     </item>
 </ripple>
 
