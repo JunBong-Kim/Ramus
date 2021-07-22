@@ -59,7 +59,7 @@
                     android:id="@+id/title_mask"
                     android:fontFamily="@font/spoqahansans_medium"
                     android:textColor="@color/text_primary"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -113,7 +113,7 @@
                     android:fontFamily="@font/spoqahansans_medium"
                     android:letterSpacing="-0.05"
                     android:textColor="@color/text_primary"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -158,6 +158,7 @@
                 </ImageView>
 
                 <TextView
+                    android:layout_marginTop="3dp"
                     android:layout_marginLeft="22dp"
                     app:layout_constraintStart_toEndOf="@id/image_no_seat"
                     app:layout_constraintTop_toTopOf="@id/image_no_seat"
@@ -165,7 +166,7 @@
                     android:id="@+id/title_no_seat"
                     android:fontFamily="@font/spoqahansans_medium"
                     android:textColor="@color/text_primary"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:letterSpacing="-0.05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
