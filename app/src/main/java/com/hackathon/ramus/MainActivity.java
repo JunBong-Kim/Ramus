@@ -38,9 +38,12 @@ import com.hackathon.ramus.Model.User;
 import com.hackathon.ramus.Viewmodel.MainViewModel;
 import com.hackathon.ramus.databinding.ActivityMainBinding;
 import com.hackathon.ramus.databinding.BottomDialogConfirmSeatBinding;
+import com.hackathon.ramus.databinding.DialogBedStudentBinding;
+import com.hackathon.ramus.databinding.DialogConfirmedBinding;
 
 import java.lang.reflect.Field;
 
+import java.util.Calendar;
 import java.util.Observable;
 
 import static com.hackathon.ramus.Constants.COLLECTION_NAME_OF_SEATS;
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
     Observer<User> observer;
-
+    public Calendar cal = Calendar.getInstance();
     private boolean flag = false;
 
     @Override
@@ -92,6 +95,25 @@ public class MainActivity extends AppCompatActivity implements MyListener {
     }
 
     private void setListeners() {
+
+        binding.layoutSafeLibrary.informCoronaLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogConfirmedBinding binding =DialogConfirmedBinding.inflate(getLayoutInflater());
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(binding.getRoot());
+                //dialog.setCancelable(false);
+                setPicker(binding.pickerMonth,12);
+                binding.pickerMonth.setValue(cal.get(Calendar.MONTH) + 1);
+                setPicker(binding.pickerDay,31);
+                binding.pickerDay.setValue(cal.get(Calendar.DATE));
+
+                dialog.show();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            }
+        });
+
         binding.layoutMainFunction.layoutQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +217,11 @@ public class MainActivity extends AppCompatActivity implements MyListener {
 
     }
 
+    public void setPicker(NumberPicker numberPicker,int max){
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(max);
+        numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+    }
 
     private void init() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());

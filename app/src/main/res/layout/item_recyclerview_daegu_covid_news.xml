@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginHorizontal="22dp"
-    android:layout_marginVertical="22dp"
+    android:layout_marginBottom="20dp"
     android:layout_gravity="center_vertical"
     >
 
