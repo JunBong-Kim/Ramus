@@ -128,7 +128,7 @@ A rolling stone does not rust
   	효율적인 서버 데이터 관리를 할 수 있었습니다.
 
 
-
+	5 서버로는 구글사에서 제공하는 Firebase를 사용했고, 주 기능은 쪽지 기능의 알림은 동사의 FCM을 활용하였습니다.
  
     
 Libraries
