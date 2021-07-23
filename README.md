@@ -100,11 +100,11 @@ A rolling stone does not rust
 
 	1 MVVM Pattern (model-view-viewmodel, MVVM)
 	
- 	-저희는 UI Design 팀과 Function 개발 팀 으로 나누어 진행을 하였습니다. 
+ 	저희는 UI Design 팀과 Function 개발 팀 으로 나누어 진행을 하였습니다. 
  	View 와 Model 이 확실하게 구별되어 있는 MVVM 패턴은 각자의 팀 역할에 충실히 진행할수 있게 하였습니다.
    	또한, Firebase 서버단에서 받는 모든 정보에 대한 부분은 Repository 클래스에서 직접 커스텀한 LiveData를 활용해 ViewModel을 거쳐 
    	view에 알렸습니다. 이러한 방식을 통해 최대한 기능적으로 작은 단위로 나누어 각자의 역할을 수행하였고, 비록 설계단계에서 많은 비용지출이 있었지만,
-  	 로직의 일관성을 지키면서 무결점성을 최대한 보장하고자 하였습니다.
+  	로직의 일관성을 지키면서 무결점성을 최대한 보장하고자 하였습니다.
 	 
 	 
 	 
