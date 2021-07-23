@@ -1,4 +1,5 @@
 # KNUbary
+* 시연 영상 링크입니다. https://www.youtube.com/watch?v=2wtMKfKQZcs 
 
 
 주제 : 코로나 대유행 속 모두가 방역의 주체가 되어 안전하고 건강한 도서관 형성에 도움을 주는 종합 어플리케이션
@@ -6,6 +7,8 @@
 	작품명 : KNUbary
 
 	* 아래 엑박뜨는 그림을 클릭하면 설명과 함께 실제 앱 구동 사진이 첨부되어 있습니다 
+	
+	
  ----------------------------------------------------------------------------------------------------------------------
 
 팀 정보
@@ -20,7 +23,6 @@
 
 
 
-* 시연 영상 링크입니다. https://www.youtube.com/watch?v=2wtMKfKQZcs 
 
 
 
@@ -157,7 +159,7 @@
 
 Libraries
 
-	저희 어플내에는  smtp(simple mail tramsfer protocol) 을 활용해  메일 송신을 위해 Java Mail Api를 활용했습니다.
+	저희 어플내에는  smtp(simple mail transfer protocol) 을 활용해  메일 송신을 위해 Java Mail Api를 활용했습니다.
  	대구 실시간 재난 문자 현황을 파싱하기 위해서 jsoup 라이브러리를 사용했습니다.
  	QR 코드 사용을 위해 ZXING Library 를 사용했습니다.
  	안드로이드 노티피케이션 알림을 활용하기 위해 Retrofit2 라이브러리를 사용했습니다.
