@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.hackathon.ramus.Model.Seat;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static com.hackathon.ramus.Constants.DATA_USER_SEAT_NULL;
+import static com.hackathon.ramus.Constants.INTENT_DATA_EMAIL;
 import static com.hackathon.ramus.Constants.INTENT_DATA_WEB_VIEW_TYPE;
 import static com.hackathon.ramus.Constants.TYPE_DAEGU;
 import static com.hackathon.ramus.Constants.TYPE_KB;
@@ -47,6 +49,16 @@ public class OccupiedMainActivity extends AppCompatActivity {
     }
 
     private void setClickListeners() {
+        binding.layoutSafeLibrary.coronaLibraryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ConfirmationHistoryActivity.class));
+            }
+        });
+
+
+
+
         binding.layoutMain2Function.layoutFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

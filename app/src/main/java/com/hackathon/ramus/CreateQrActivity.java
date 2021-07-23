@@ -22,7 +22,7 @@ public class CreateQrActivity extends AppCompatActivity {
         binding = ActivityCreateQrBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        text = "S-Lounge09";
+        text = "CRETECZONE35";
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
