@@ -36,9 +36,11 @@
                     >
                 </include>
             </LinearLayout>
-            <include layout="@layout/layout_safe_library"
-                android:id="@+id/layout_safe_library">
-            </include>
+
+            <include
+                android:id="@+id/layout_safe_library"
+                layout="@layout/layout_safe_library_occupied"></include>
+
             <include layout="@layout/layout_corona_web"
                 android:id="@+id/layout_corona_web">
             </include>

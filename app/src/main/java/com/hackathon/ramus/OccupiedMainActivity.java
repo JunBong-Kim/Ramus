@@ -153,6 +153,14 @@ public class OccupiedMainActivity extends AppCompatActivity {
             }
         });
 
+        binding.layoutMain2Function.laoutMyinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyHistoryActivity.class);
+                intent.putExtra(INTENT_DATA_EMAIL, userKey);
+                startActivity(intent);
+            }
+        });
 
     }
 
