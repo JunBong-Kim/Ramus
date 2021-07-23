@@ -116,8 +116,9 @@ public class DaeguCovidConfirmationActivity extends AppCompatActivity {
                     arrayList.add(new DaeguCovidNews(list2.get(5), list2.get(9), list2.get(13), list2.get(17), list2.get(21), list2.get(25)));
                 }
 
-
             }
+
+            if(arrayList.size() == 0)arrayList.add(new DaeguCovidNews("현재까지 대구 재난 문자가 없습니다! ","다행입니다.","","","",""));
             adapter.setList(arrayList);
             asyncDialog.dismiss();
 
