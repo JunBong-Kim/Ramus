@@ -216,6 +216,6 @@ Future Work
   아래 좌석 5개 정도의 QR 코드 예시 첨부하겠습니다.
   
 
-
+<img src="https://github.com/JunBong-Kim/Ramus/issues/7#issue-951230017" width="40%" height="30%" title="px(픽셀) 크기 설정" alt=“QRcode”></img>
 
 감사합니다.
