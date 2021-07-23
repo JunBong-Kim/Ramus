@@ -34,6 +34,7 @@
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_mask"
+                android:background="@drawable/ripple_custom_spread"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -85,6 +86,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/ripple_custom_spread"
                 android:id="@+id/layout_noize"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -139,6 +141,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/ripple_custom_spread"
                 android:id="@+id/layout_no_seat"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
